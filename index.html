@@ -1,0 +1,2785 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    html,body{margin: 0;padding: 0;font-size: 20px;width: 100%;height: 100%;background: repeating-linear-gradient(135deg,#fb3 50%,#58a 33%)}
+    #top{display: none}
+    #button4{display: none}
+    .exam{display: none}
+    #questions{display: none}
+    #results{display: inline}
+    #answerP{display: none}
+    #box{display:none;height: 80%;width: 80%;background: #eee;position: absolute;top: 50%;left: 50%;transform:translate(-50%,-50%);padding: 30px;border-top-left-radius:50px;border-bottom-right-radius:50px}
+    button{width: 100px;height: 40px;font-size: 18px;margin-left: 20px;margin-right: 20px;margin-bottom: 10px;}
+    #text{height: 30%;}
+    #text fieldset{height: 80%}
+    #options{height: 43%}
+    #options fieldset{height: 220px;}
+    #answer fieldset{height: 80px;}
+    #button{position: relative;text-align:center}
+    input[type=checkbox] {
+        zoom: 130%;
+    }
+    #password{width: 400px;height: 250px;background: #eee;border-radius: 20px;position: absolute;top: 50%;left: 50%;transform:translate(-50%,-50%);}
+    #passwordInput{width: 200px;height: 30px;font-size: 20px;}
+    #passwordBox{position: relative;text-align:center;top:30%;}
+    #passwordButton1{margin-top: 20px;}
+</style>
+<body>
+<div id="password">
+    <div id="passwordBox">
+        <input id="passwordInput" type="text" value="请输入密码" onfocus="this.select()"></br>
+        <button id="passwordButton1" onclick="passward()">确认</button>
+    </div>
+
+</div>
+<div id="box">
+<div id="top">
+    <button id="buttonPractice">练习</button>
+    <button id="buttonExam">考试</button>
+</div>
+<div id="text">
+    <fieldset>
+        <legend id="legend"></legend>
+        <p id="problemDry">题干</p>
+    </fieldset>
+</div>
+<div id="options" onchange="results1()">
+    <form>
+        <fieldset>
+            <legend id="legendOptions">选项</legend>
+            A.<input type="checkbox" name="options"><span id="options1">对应选项A</span></br>
+            B.<input type="checkbox" name="options"><span id="options2">对应选项B</span></br>
+            C.<input type="checkbox" name="options" class="input1"><span id="options3">对应选项C</span></br>
+            D.<input type="checkbox" name="options" class="input1"><span id="options4">对应选项D</span></br>
+        </fieldset>
+    </form>
+    <p id="results">正确/错误</p>
+</div>
+<div id="button">
+    <button id="button1" onclick="buttonUp()">上一题</button>
+    <button id="button2" onclick="buttonDown()">下一题</button>
+    <button id="button3" ONCLICK="answerClick()">显示答案</button>
+    <button id="button4" >显示解析</button>
+</div>
+<div id="answer">
+    <fieldset>
+        <legend>答案</legend>
+        <p id="answerP"></p>
+    </fieldset>
+
+</div>
+<div id="number"  class="exam">
+    <span id="number1">[1]</span>
+    <span id="number2">[2]</span>
+    <span id="number3">[3]</span>
+</div>
+<div id="submit"  class="exam">
+    <button>交卷</button>
+</div>
+
+<div id="questions">
+<table id="table1">
+<tr class="one">
+    <td>下列不属于“关注客户”个人的是（ ）。</td>
+    <td title="1">被外汇局列为“关注名单”的个人</td>
+    <td >被外汇局列为“可信客户”的个人</td>
+    <td >被外汇局列为“预关注”的个人</td>
+    <td >被其他监管部门列为黑名单或被法院列为失信人员的个人</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr class="one">
+    <td>下列不属于分拆业务特征的有（ ）。</td>
+    <td >境外同一个人或机构同日、隔日或连续多日将外汇汇给境内5个以上（含，下同）不同个人，收款人分别结汇</td>
+    <td >&nbsp;5个以上不同个人同日、隔日或连续多日分别结汇后，将人民币资金存入或汇入同一个人或机构的人民币账户</td>
+    <td  title="1">个人在10天内从同一外汇储蓄账户5次以上（含）提取接近等值1万美元外币现钞；或者5个以上个人同一日内，共同在同一银行网点，每人办理接近等值5千美元现钞结汇</td>
+    <td >同一个人将其外汇储蓄账户内存款划转至5个以上直系亲属，直系亲属分别在年度总额内结汇；或者同一个人的5个以上直系亲属分别在年度总额内购汇后，将所购外汇划转至该个人外汇储蓄账户</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr class="one">
+    <td>关于《服务贸易等项目对外支付税务备案表》的表述，错误的是（ ）。</td>
+    <td >备案信息应与申请支付项目一致</td>
+    <td >备案表应加盖主管国税机关印章</td>
+    <td >本次付汇金额应大于或等于实际支付金额</td>
+    <td  title="1">同一笔合同需要多次对外支付的，应要求客户在最后一次付汇前将之前几笔金额合计办理税务备案手续</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr class="one">
+    <td>单笔提取等值（ ）以上外币现钞的，应由外汇局核准并出具《提取外币现钞备案表》。</td>
+    <td >2000美元</td>
+    <td >5000美元</td>
+    <td  title="1">10000美元</td>
+    <td >20000美元</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr class="one">
+    <td>银行为客户办理外汇业务应进行尽职审查，具体要求不包括（ ）。</td>
+    <td >重点关注大额、高频、分拆等可疑交易，对于客户身份存疑、交易背景存疑、交易凭证存疑等情况，应执行更严格的交易真实性审核标准</td>
+    <td >了解业务的交易性质、目的及背景等信息，并对业务背景的真实性与合理性进行审核</td>
+    <td >对于可信客户，额度内的业务在确认交易性质的前提下，<br>可以凭有效身份证件直接办理<br></td>
+    <td  title="1">对于关注客户，额度内的业务可不进行加强真实性审核</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr class="one">
+    <td>个人开立个人银行账户必须落实（ ）管理原则。</td>
+    <td  title="1">实名制</td>
+    <td >登记制</td>
+    <td >核准制</td>
+    <td >额度制</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr class="one">
+    <td>银行账户的实名制不包括下列哪个要素（ ）。</td>
+    <td >银行账户名称与身份证件名称的一致性</td>
+    <td >身份证件的有效性</td>
+    <td >存款人真实意愿表示的真实性</td>
+    <td  title="1">存款人资金来源及用途的真实性</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr class="one">
+    <td>委托他人开立个人银行账户的情况下，应审核的材料不包括（ ）。</td>
+    <td >委托人的有效身份证件</td>
+    <td >代理人的有效身份证件</td>
+    <td  title="1">委托人与代理人的关系证明材料</td>
+    <td >委托人的授权书</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr class="one">
+    <td>关于代理开户审核，表述有误的是（ ）。</td>
+    <td >无民事行为能力或限制民事行为能力人需要开立银行账户的，由法定代理人或人民法院、有关部门依法指定的人员代理办理</td>
+    <td  title="1">委托他人开立银行账户可以开通电子渠道类等远程付款功能</td>
+    <td >代理开立账户的，银行必须联系被代理人进行核实，核实无误后方可办理业务</td>
+    <td >若代理人代理他人在银行开立账户较为频繁的，则应审核代理业务的合理性、必要性，无合理性的应拒绝办理</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr class="one">
+    <td>外币现钞存入当日累计等值（ ）的，除审核本人的有效证件外，还需审核经海关签章的《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行外币现钞提取单据。</td>
+    <td >&nbsp;5000美元以上（含）</td>
+    <td  title="1">5000美元以上</td>
+    <td >10000美元以上（含）</td>
+    <td >10000美元以上</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr class="one">
+    <td>关于外交人员办理外币现钞存入业务，表述正确的是（ ）。</td>
+    <td >凭有效护照办理的，当日存入现钞金额可提高至10万美元</td>
+    <td >凭外交人员证件办理的，当日存入现钞金额可提高至10万美元</td>
+    <td >凭有效护照办理的，当日存入现钞金额可提高至20万美元</td>
+    <td  title="1">凭外交人员证件办理的，金额不受限制</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='80' class='x66' style='mso-height-source:userset;height:60pt' id='r12'>
+    <td height='78'  style='height:58.5pt;'>关于存入外币现钞的审核原则及要点，表述错误的是（ ）。</td>
+    <td >存入的金额不得超过经海关签章的本人《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行（境内银行）外币现钞提取单据上标注的金额</td>
+    <td  title="1">银行经办人员应在客户提供的原单据上签注（存款金额、日期和经办网点）并加盖业务印章或业务戳记后，留存原件</td>
+    <td >银行应关注取款凭条的打印次数，了解是否存在重复打印情况</td>
+    <td >对于关注客户，银行原则上应拒绝办理代理业务</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr height='16' class='x66' style='mso-height-source:userset;height:12pt' id='r13'>
+    <td height='14'  style='height:10.5pt;'>境外个人结汇时，结汇资金属性不能为（ ）。</td>
+    <td >旅游</td>
+    <td >金融和保险服务</td>
+    <td  title="1">直接投资撤资</td>
+    <td >职工报酬和赡家款</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r14'>
+    <td height='46'  style='height:34.5pt;'>下列说法正确的是（ ）。</td>
+    <td  title="1">个人外汇结算账户不得提取外币现钞</td>
+    <td >境外卡在境内不得到境内银行柜台提取外币现钞</td>
+    <td >境外卡可以在自动柜员机上提取外币现钞</td>
+    <td >对于关注客户，应加强提钞用途真实性审核，原则上应可以办理代理业务</td>
+    <td >1</td>
+    <td class='x65'>A</td>
+</tr>
+<tr  class="one"  class='x66' style='mso-height-source:userset;height:48pt' id='r15'>
+    <td height='62' class='x65' style='height:46.5pt;'>客户携带金额在等值（ ）, 银行应凭个人原提钞银行开立的存款证明（利息清单或取款凭条）或相关购汇凭证、护照或往来港澳通行证、往来台湾通行证、有效签证和签注，办理外币携带证。</td>
+    <td >5000美元以上（不含）</td>
+    <td >10000美元以上（不含）</td>
+    <td >5000美元以上（含）至10000美元（不含）</td>
+    <td  title="1">5000美元以上（不含）至10000美元（含）</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='80' class='x66' style='mso-height-source:userset;height:60pt' id='r16'>
+    <td height='78' class='x65' style='height:58.5pt;'>关于补办《携带外汇出境许可证》，下列说法错误的是（ ）。</td>
+    <td >银行应注意审查护照上的出入境记录，在个人出境后不得为其补办《携带证》</td>
+    <td >审核提供的材料和银行原留存材料无误后补办《携带证》，在补办的《携带证》上加注“补办”字样，并注明原×××号《携带证》同时作废</td>
+    <td >对于《携带证》逾期情况下补办业务，应要求客户提供原《携带证》原件；如果是遗失补办的，可以要求客户提供遗失原因说明或挂失声明</td>
+    <td  title="1">银行办理业务的相关材料至少保存3年备查</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r17'>
+    <td height='46' class='x65' style='height:34.5pt;'>关于个人结售汇的年度总额管理，下列说法正确的是（ ）。</td>
+    <td >个人结汇年度总额为每人每年等值5万美元，对境内个人购汇无年度总额限制</td>
+    <td >境内个人购汇年度总额为每人每年等值5万美元，对个人结汇无年度总额限制</td>
+    <td >个人结汇和境内个人购汇年度总额分别为每人每年等值10万美元和5万美元</td>
+    <td  title="1">个人结汇和境内个人购汇年度总额分别为每人每年等值5万美元</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='16' class='x66' style='mso-height-source:userset;height:12pt' id='r18'>
+    <td height='14' class='x65' style='height:10.5pt;'>允许携带外币现钞入境免申报金额为（ ）。</td>
+    <td>2000美元以下</td>
+    <td>3000美元以下</td>
+    <td title="1">5000美元以下</td>
+    <td>10000美元以下</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one" height='16' class='x66' style='mso-height-source:userset;height:12pt' id='r19'>
+    <td height='14' class='x65' style='height:10.5pt;'>境外个人旅游购物项下外汇收支可以通过哪种账户办理？（ ）</td>
+    <td >他人的外汇储蓄账户</td>
+    <td  title="1">本人的外币储蓄账户</td>
+    <td >本人的外币结算账户</td>
+    <td >直系亲属的外汇储蓄账户</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r20'>
+    <td height='46' class='x65' style='height:34.5pt;'>在办理境外个人超过年度总额的非经营性结汇业务时，结汇单笔等值（ ）以上的，应将结汇所得人民币资金直接划转至交易对方的境内人民币账户。</td>
+    <td >2000美元</td>
+    <td >5000美元</td>
+    <td >10000美元</td>
+    <td  title="1">50000美元</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r21'>
+    <td height='46' class='x65' style='height:34.5pt;'>本年度未超过年度结汇总额的个人手持外币现钞结汇，当日外币现钞结汇累计金额在等值（ ）的，凭本人的有效身份证件办理。</td>
+    <td >2千美元以下（含）</td>
+    <td  title="1">5千美元以下（含）</td>
+    <td >1万美元以下（含）</td>
+    <td >5万美元以下（含）</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r22'>
+    <td height='46' class='x65' style='height:34.5pt;'>本年度未超过年度结汇总额的个人手持外币现钞结汇，当日累计金额超过等值（ ）, 凭本人的有效身份证件、经海关签章的本人（）或本人原存款银行外币现钞提取单据办理。</td>
+    <td >5千美元、《携带外汇出境许可证》 </td>
+    <td  title="1">5千美元、《中华人民共和国海关进境旅客行李物品申报单》</td>
+    <td >5万美元、《中华人民共和国海关进境旅客行李物品申报单》</td>
+    <td >&nbsp;5万美元、《携带外汇出境许可证》</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r23'>
+    <td height='46' class='x65' style='height:34.5pt;'>在办理个人手持外汇现钞结汇业务时，境内个人结汇审查（ ），境外个人结汇审查（），重点审核有交易额的证明材料的真实性和一致性。</td>
+    <td >资金用途材料、资金来源材料</td>
+    <td >均为资金用途材料</td>
+    <td >均为资金来源材料</td>
+    <td  title="1">资金来源材料、资金用途材料</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='16' class='x66' style='mso-height-source:userset;height:12pt' id='r24'>
+    <td height='14' class='x65' style='height:10.5pt;'>关于个人所购外汇，下列说法错误的是（ ）。</td>
+    <td >可以汇出境外使用</td>
+    <td >可以存入本人外汇储蓄账户</td>
+    <td >可以按规定携带出境</td>
+    <td  title="1">可以存入非本人储蓄账户</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r25'>
+    <td height='30' class='x65' style='height:22.5pt;'>下列情况中，单笔支付等值5万美元以上的须办理和提交《税务备案表》的是（ ）。</td>
+    <td >境内个人境外留学</td>
+    <td  title="1">境外个人在境内的工作报酬</td>
+    <td >境内个人境外旅游</td>
+    <td >境内个人境外探亲</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r26'>
+    <td height='30' class='x65' style='height:22.5pt;'>外汇局开具的《提取外币现钞备案表》有效期为自签发之日起（ ）天。</td>
+    <td >20天</td>
+    <td  title="1">30天</td>
+    <td >60天</td>
+    <td >180天</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='80' class='x66' style='mso-height-source:userset;height:60pt' id='r27'>
+    <td height='78' class='x65' style='height:58.5pt;'>关于境外个人购汇，原兑换未用完的人民币，下列说法错误的是（ ）。</td>
+    <td >兑回的金额不能超过原兑换金额</td>
+    <td  title="1">单笔或当日累计兑换不超过等值5000美元（含）以及离境前在境内关外场所当日累计不超过等值10000美元（含）的兑换，可凭本人有效身份证件办理</td>
+    <td >如是兑换未用完人民币兑回业务，此笔购汇录入“个人外汇业务系统”时，资金属性应选择“境外个人原币兑回”</td>
+    <td >个人所购外汇，可以汇出境外、存入本人外汇储蓄账户、或按规定携带出境</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r28'>
+    <td height='30' class='x65' style='height:22.5pt;'>下列属于应录入个人外汇业务系统的业务是（ ）。</td>
+    <td  title="1">通过银行柜台尾零结汇、转利息结汇等大于等值100美元的结汇</td>
+    <td >境内卡境外使用购汇还款</td>
+    <td >境外卡通过自助银行设备提取人民币现钞</td>
+    <td >通过外币代兑点发生的结汇</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r29'>
+    <td height='46' class='x65' style='height:34.5pt;'>下列关于个人境内外汇划转业务，审核材料表述错误的是（ ）。</td>
+    <td >本人外汇储蓄账户之间的划转，凭有效身份证件办理</td>
+    <td >本人与其直系亲属储蓄账户间的资金划转，凭双方有效身份证件和直系亲属关系证明办理</td>
+    <td >划转账户分属境内个人和境外个人，其资金境内划转按跨境交易进行管理</td>
+    <td  title="1">本人与其直系亲属储蓄账户间的资金划转，主体应同为境内个人或同为境外个人，实行额度管理</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='16' class='x66' style='mso-height-source:userset;height:12pt' id='r30'>
+    <td height='14' class='x65' style='height:10.5pt;'>以下关于个人年度结售汇额度，说法错误的是（ ）。</td>
+    <td >境内个人结汇额度为等值5万美元</td>
+    <td >境内个人购汇额度为等值5万美元</td>
+    <td >境外个人结汇额度为等值5万美元</td>
+    <td  title="1">境外个人购汇额度为等值5万美元</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one"  class='x66' style='mso-height-source:userset;height:48pt' id='r31'>
+    <td height='62' class='x65' style='height:46.5pt;'>个人非经营性收汇业务，收入款解付银行或结汇中转行应在为客户解付或结汇后（ ）个工作日内通知申报主体按《涉外收入申报单》的填报说明逐笔填写《涉外收入申报单》纸质凭证或电子单据。</td>
+    <td >当日</td>
+    <td >2</td>
+    <td >3</td>
+    <td  title="1">5</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='16' class='x66' style='mso-height-source:userset;height:12pt' id='r32'>
+    <td height='14' class='x65' style='height:10.5pt;'>个人经常项目项下的非经营性外汇收入应解付至（ ）。</td>
+    <td >个人结算账户</td>
+    <td >个人外汇经常账户</td>
+    <td title="1" >个人外汇储蓄账户</td>
+    <td >个人外汇资本账户</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r33'>
+    <td height='30' class='x65' style='height:22.5pt;'>境内个人等值（ ）以上的汇入汇款，应在款项解付后（）个工作日内完成国际收支申报。</td>
+    <td >2千美元，2</td>
+    <td >5千美元，2</td>
+    <td  title="1">5千美元，5</td>
+    <td >1万美元，5</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r34'>
+    <td height='46' class='x65' style='height:34.5pt;'>下列关于境内个人经常项下非经营性收汇业务，说法错误的是（ ）。</td>
+    <td  title="1">5千美元（不含）以下的，可仅申报基础信息</td>
+    <td >境内非居民个人汇入款不论金额大小均需国际收支申报</td>
+    <td >境内个人等值5千美元以上的汇入汇款，应在款项解付后5个工作日内完成国际收支申报</td>
+    <td >对于关注客户，银行应严格审核交易真实性后办理入账。</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r35'>
+    <td height='30' class='x65' style='height:22.5pt;'>手持外币现钞直接汇出境外的，当日累计等值（ ），凭本人有效身份证件办理。</td>
+    <td >5千美元以下（含）</td>
+    <td >5千美元以下（不含）</td>
+    <td  title="1">1万美元以下（含）</td>
+    <td >1万美元以下（不含）</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r36'>
+    <td height='46' class='x65' style='height:34.5pt;'>境内个人手持外汇现钞直接汇出境外时，超过当日累计等值1万美元以上的，除审核本人有效身份证件外，还应审核的材料不包括（ ）。</td>
+    <td  title="1">原购汇凭证</td>
+    <td >经海关签章的《中华人民共和国海关进境旅客行李物品申报单》</td>
+    <td >本人原存款银行外币现钞提取单据</td>
+    <td >经常项目项下有交易额的真实性凭证</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one"  class='x66' style='mso-height-source:userset;height:48pt' id='r37'>
+    <td height='62' class='x65' style='height:46.5pt;'>下列关于个人外汇结算账户说法正确的是（ ）。</td>
+    <td >个人外汇结算账户可以存入外币现钞</td>
+    <td >个人外汇结算账户可以提取外币现钞</td>
+    <td  title="1">个人外汇结算账户纳入外汇局“外汇账户管理信息系统”管理</td>
+    <td >个体工商户用于进口贸易所购外汇，可直接将外汇资金划转至代理企业经常项目外汇账户后汇出境外，另有规定除外</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one"  class='x66' style='mso-height-source:userset;height:48pt' id='r38'>
+    <td height='62' class='x65' style='height:46.5pt;'>关于境内个人结算账户外汇划转业务，关于审核要点下列说法错误的是（ ）。</td>
+    <td >本人外汇结算账户之间划转可以直接划转，不受限制</td>
+    <td >本人外汇储蓄账户与结算账户之间划转，储蓄账户向结算账户划转，仅限于划转当日对外支付，不得划转后结汇</td>
+    <td >本人外汇储蓄账户与结算账户之间跨行划转，划出行应标注资金来源的账户性质</td>
+    <td  title="1">划转给代理企业时，可直接将款项划转给代理企业的经常项目外汇账户后汇出境外</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r39'>
+    <td height='30' class='x65' style='height:22.5pt;'>下列不属于境内个人参与境外上市公司股权激励计划业务须提交的审核材料的是（ ）</td>
+    <td >股权激励计划外汇登记证明复印件</td>
+    <td >个人与境内公司雇佣及劳务关系说明</td>
+    <td >本人有效身份证件</td>
+    <td  title="1">个人与境外公司雇佣及劳务关系说明</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r40'>
+    <td height='30' class='x65' style='height:22.5pt;'>发生涉外付款的申报主体，应在提交《境外汇款申请书》或《对外付款/承兑通知书》的（ ）办理该款项的申报。</td>
+    <td  title="1">同时</td>
+    <td >5个工作日内</td>
+    <td >3个工作日内</td>
+    <td >10个工作日内</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='80' class='x66' style='mso-height-source:userset;height:60pt' id='r41'>
+    <td height='78' class='x65' style='height:58.5pt;'>下列关于个人参与股权激励计划资金来源及划转的业务办理描述错误的（ ）。</td>
+    <td >以自有外汇资金参与的，银行应凭加盖了境内代理机构公章的股权激励计划外汇登记证明复印件、个人与境内公司雇佣及劳务关系说明等材料办理相应的资金划转手续</td>
+    <td >以人民币资金参与的，个人应将人民币资金划转至境内代理机构的账户，由境内代理机构办理有关购付汇手续。</td>
+    <td >&nbsp;应是个人外汇储蓄账户中自有外汇或人民币等境内合法资金参与股权激励计划</td>
+    <td  title="1">须审核个人与境外公司雇佣及劳务关系说明</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r42'>
+    <td height='30' class='x65' style='height:22.5pt;'>下列关于个人参与股权激励计划所得外汇收入调回的资金说法正确的是（ ）。</td>
+    <td  title="1">均可保留现汇</td>
+    <td >须全部结汇</td>
+    <td >仅允许保留部分现汇</td>
+    <td >强制部分结汇</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r43'>
+    <td height='46' class='x65' style='height:34.5pt;'>境外个人购买境内商品房结汇业务，须审核的资料不包括（ ）。</td>
+    <td >商品房销售合同或预售合同</td>
+    <td >本人有效身份证件</td>
+    <td >房地产主管部门出具的该非居民在所在城市购房的商品房预售合同登记备案表等相关证明</td>
+    <td  title="1">如委托他人办理，仅允许委托直系亲属办理</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r44'>
+    <td height='46'  style='height:34.5pt;'>根据《个人外汇管理办法实施细则》，个人提取外币现钞当日累计超过等值1万美元以上（不含）的，银行凭（<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>）为个人办理提取外币现钞手续。</td>
+    <td >本人有效身份证件和交易真实性证明材料</td>
+    <td  title="1">本人有效身份证件和经外汇局签章的《提取外币现钞备案表》</td>
+    <td >本人有效身份证件和国家外汇管理局核准件</td>
+    <td >交易真实性证明材料和经外汇局签章的《提取外币现钞备案表》</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r45'>
+    <td height='30'  style='height:22.5pt;'>根据《个人外汇管理办法实施细则》，本人外汇储蓄账户间的资金境内划转，凭（<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>）在银行办理。</td>
+    <td >有交易额的真实性凭证</td>
+    <td  title="1">有效身份证件</td>
+    <td >银行开户时的业务凭证</td>
+    <td >有效身份证件和有交易额的真实性凭证</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='80' class='x66' style='mso-height-source:userset;height:60pt' id='r46'>
+    <td height='78'  style='height:58.5pt;'>境内个人外汇储蓄账户资金汇出境外用于经常项目支出，当日累计等值5万美元以下的，凭（<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>）在我行办理。</td>
+    <td >经常项目项下有交易额的真实性凭证、外汇管理局或人民银行核准件</td>
+    <td >经常项目项下有交易额的真实性凭证、经海关签章的《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行外币现钞提取单据</td>
+    <td  title="1">本人有效身份证件</td>
+    <td >经常项目项下有交易额的真实性凭证、本人原存款银行外币现钞提取单据</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r47'>
+    <td height='30'  style='height:22.5pt;'>根据《个人外汇管理办法实施细则》，境外个人未用完的人民币兑回，凭（<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>）办理。</td>
+    <td >本人有效身份证件和外汇管理局核准件</td>
+    <td  title="1">本人有效身份证件和原兑换水单</td>
+    <td >本人有效身份证件和有交易额的相关证明材料（含税务凭证）</td>
+    <td >护照和相关证明材料</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr   class="one" class='x66' style='mso-height-source:userset;height:48pt' id='r48'>
+    <td height='62' class='x65' style='height:46.5pt;'>根据《个人外汇管理办法实施细则》，境外个人手持20000美元现钞汇出境外用于经常项目支出的，凭本人有效身份证件和（<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>）在银行办理。</td>
+    <td  title="1">经海关签章的《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行外币现钞提取单据</td>
+    <td >外汇管理局核准件、经海关签章的《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行外币现钞提取单据</td>
+    <td >经常项目项下有交易额的真实性凭证、外汇管理局或人民银行核准件</td>
+    <td >经常项目项下有交易额的真实性凭证、本人原存款银行外币现钞提取单据</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r49'>
+    <td height='46' class='x65' style='height:34.5pt;'>持中华人民共和国护照及境外永久居留证的个人按（<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>）进行管理，录入信息时须在“补充证件号码”栏中输入永久居留证号码。</td>
+    <td  title="1">境外个人</td>
+    <td >境内个人</td>
+    <td >居民</td>
+    <td >非居民</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r50'>
+    <td height='46' class='x65' style='height:34.5pt;'>根据《个人外汇管理办法实施细则》，境外个人将原兑换未用完的人民币兑回外汇，其原兑换水单的兑回有效期为自兑换日起（<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>）个月。</td>
+    <td >6</td>
+    <td >12</td>
+    <td  title="1">24</td>
+    <td >36</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r51'>
+    <td height='30' class='x65' style='height:22.5pt;'>根据国家外汇管理局个人外汇管理政策，（<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>）结汇和（<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>）购汇实行年度总额管理。</td>
+    <td  title="1">个人、境内个人</td>
+    <td >境内个人、境外个人</td>
+    <td >境外个人、境内个人</td>
+    <td >境内个人、个人</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r52'>
+    <td height='30'  style='height:22.5pt;'>境内个人李女士到银行办理经常项目下非经营性购汇业务，根据现行个人外汇管理政策，（<span style='mso-spacerun:yes;'>&nbsp; </span>）不得作为其购汇资金来源。</td>
+    <td >人民币现钞</td>
+    <td >李女士丈夫陈先生银行卡内的人民币资金</td>
+    <td  title="1">李女士哥哥李先生银行卡内的人民币资金</td>
+    <td >李女士父亲银行卡内的人民币资金</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one" height='16' style='mso-height-source:userset;height:12pt' id='r53'>
+    <td height='14'  style='height:10.5pt;'>以下情况必须要录入外汇管理局个人外汇监测系统的是（<span style='mso-spacerun:yes;'>&nbsp; </span>）。</td>
+    <td >通过外币代兑点发生的个人结售汇</td>
+    <td >现汇账户资金划转到现钞账户</td>
+    <td >信用卡购汇还款</td>
+    <td  title="1">境外个人结汇1000美元</td>
+    <td >1</td>
+    <td>D</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r54'>
+    <td height='30'  style='height:22.5pt;'>发生涉外收入的申报主体，应在解付银行解付之日或结汇中转行结汇之日后（ ）个工作日内办理该款项的申报。</td>
+    <td  title="1">5</td>
+    <td >3</td>
+    <td >10</td>
+    <td >15</td>
+    <td >1</td>
+    <td>A</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r55'>
+    <td height='30'  style='height:22.5pt;'>同币种等额的现钞和现汇在相同时间点分别结汇后，所得人民币金额（<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>）。</td>
+    <td >相等</td>
+    <td  title="1">现汇结汇后所得人民币更多</td>
+    <td >现钞结汇后所得人民币更多</td>
+    <td >不一定</td>
+    <td >1</td>
+    <td>B</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r56'>
+    <td height='30'  style='height:22.5pt;'>境外个人将因未购得退回的人民币购房款购汇汇出业务时，须审核的材料及审核原则不包括（ ）。</td>
+    <td >原结汇凭证</td>
+    <td >与房地产开发企业或二手房出让方解除商品房买卖合同的证明文件</td>
+    <td >房地产主管部门出具的取消购买商品房的证明</td>
+    <td  title="1">如委托他人办理，仅允许委托直系亲属办理</td>
+    <td >1</td>
+    <td>D</td>
+</tr>
+<tr  class="one"  style='mso-height-source:userset;height:48pt' id='r57'>
+    <td>境外个人将因未购得退回的人民币购房款购汇汇出业务时，须审核原则表述错误的是（ ）。</td>
+    <td >结汇后退回的，人民币购汇后应原路退回个人外汇账户或划回境内外汇账户（只适用于原购房款为从境内外汇账户结汇支付的情况）</td>
+    <td  title="1">结汇后退回的人民币金额不得低于原结汇金额</td>
+    <td >允许购房款境内留存期间产生的合理利息一并汇出</td>
+    <td >银行应在办理业务后及时完成国际收支申报</td>
+    <td >1</td>
+    <td>B</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r58'>
+    <td height='46'  style='height:34.5pt;'>关于境外个人转让境内商品房所得资金购付汇业务，汇出金额的审核原则，表述正确的是（ ）</td>
+    <td >汇出金额不得超出商品房转让金额</td>
+    <td >汇出金额可以超出商品房转让金额</td>
+    <td  title="1">汇出金额不得超出商品房转让金额扣减本次转让所包括的税费后的余额</td>
+    <td >汇出金额可以超出商品房转让金额扣减本次转让所包括的税费后的余额</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r59'>
+    <td height='30'  style='height:22.5pt;'>以下哪些涉外收支业务不需要报送国际收支申报的申报信息（ ）。</td>
+    <td >所有境内非居民个人项下的涉外收入</td>
+    <td  title="1">金额在等值5000美元（含）以下的境内居民个人涉外收入</td>
+    <td >所有境内非居民个人项下境外付款（包括电汇、票汇）</td>
+    <td >所有境内居民个人项下境外付款（包括电汇、票汇）</td>
+    <td >1</td>
+    <td>B</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r60'>
+    <td height='30'  style='height:22.5pt;'>申报单中有关收/付款人国别是指（ ）。</td>
+    <td >收/付款银行所在国家或地区</td>
+    <td  title="1">收/付款人常驻的国家或地区</td>
+    <td >收/付款人的开户银行所在国家或地区</td>
+    <td >交易发生地</td>
+    <td >1</td>
+    <td>B</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r61'>
+    <td height='46'  style='height:34.5pt;'>以下关于境外个人经常项目外汇汇出境外的说法，不正确的是（ ）。</td>
+    <td >外汇储蓄账户内外汇汇出，凭本人有效身份证件办理</td>
+    <td >手持外币现钞汇出，超过累计等值1万美元的，需提供外币现钞来源证明</td>
+    <td  title="1">每天汇款金额不能超过等值5万美元</td>
+    <td >境外收款人可以为公司或个人</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r62'>
+    <td height='46'  style='height:34.5pt;'>根据《国家外汇管理局关于进一步完善个人结售汇业务管理的通知》，个人经常项目项下非经营性购汇，购汇资金来源不包括（<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>）。</td>
+    <td >人民币现钞</td>
+    <td >本人的人民币账户和银行卡内资金</td>
+    <td >直系亲属的人民币账户和银行卡内资金</td>
+    <td  title="1">他人的人民币账户和银行卡内资金</td>
+    <td >1</td>
+    <td>D</td>
+</tr>
+<tr  class="one" height='16' style='mso-height-source:userset;height:12pt' id='r63'>
+    <td height='14'  style='height:10.5pt;'>以下不可以用旅行支票支付的是（<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>）。</td>
+    <td >境外旅游费用</td>
+    <td >境外就医费用</td>
+    <td  title="1">贸易项下货款</td>
+    <td >留学学费</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r64'>
+    <td height='46'  style='height:34.5pt;'>电子旅行支票只能由使用人本人购买，纸质旅行支票可代理购买，代理人只限于直系亲属，代理人在购买时须另提供的资料不包括（<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>）。</td>
+    <td >双方有效身份证件</td>
+    <td >直系亲属关系证明</td>
+    <td >委托书</td>
+    <td  title="1">外汇管理局核准件</td>
+    <td >1</td>
+    <td>D</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r65'>
+    <td height='30'  style='height:22.5pt;'>根据《个人外汇管理办法实施细则》，个人提取外币现钞当日累计等值（<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>）美元以下（含）的，可以在银行直接办理。</td>
+    <td >3000</td>
+    <td >5000</td>
+    <td  title="1">10000</td>
+    <td >15000</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr class="one"  height='48' style='mso-height-source:userset;height:36pt' id='r66'>
+    <td height='46'  style='height:34.5pt;'>根据《个人外汇管理办法实施细则》，个人向外汇储蓄账户存入外币现钞，当日累计等值 （<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>）以下（含）的，可以在银行直接办理。</td>
+    <td >2000</td>
+    <td >3000</td>
+    <td  title="1">5000</td>
+    <td >10000</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one"  style='mso-height-source:userset;height:48pt' id='r67'>
+    <td>根据《国家外汇管理局关于进一步完善个人结售汇业务管理的通知》，本年度未超过年度结汇总额的个人手持外币现钞结汇，当日外币现钞结汇累计金额在等值（<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>）美元以下（含）的，凭本人有效身份证件在银行办理。</td>
+    <td >1000</td>
+    <td  title="1">5000</td>
+    <td >10000</td>
+    <td >50000</td>
+    <td >1</td>
+    <td>B</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r68'>
+    <td height='46'  style='height:34.5pt;'>银行在事后核查中发现个人涉嫌分拆结售汇的，应注意收集相关线索，避免同一个人再次办理分拆业务，同时于发现之日起（ ）个工作日内向国家外汇管理局所在地分支局报告。</td>
+    <td >1</td>
+    <td >2</td>
+    <td  title="1">3</td>
+    <td >5</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r69'>
+    <td height='30'  style='height:22.5pt;'>个人对外贸易经营者办理对外贸易购付汇、收结汇应通过本人的（ ）进行。</td>
+    <td  title="1">外汇结算账户</td>
+    <td >外汇储蓄账户</td>
+    <td >人民币结算账户</td>
+    <td >人民币储蓄账户</td>
+    <td >1</td>
+    <td>A</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r70'>
+    <td height='46'  style='height:34.5pt;'>外汇局对以借用他人额度等方式规避额度及真实性管理的个人，列入“关注名单”管理，“关注名单”内个人的关注期限为列入“关注名单”的当年及之后连续（ ）年。</td>
+    <td >1</td>
+    <td  title="1">2</td>
+    <td >3</td>
+    <td >5</td>
+    <td >1</td>
+    <td>B</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r71'>
+    <td height='30'  style='height:22.5pt;'>在关注期限内，“关注名单”内个人办理个人结售汇业务，应凭（ ）办理。</td>
+    <td >外汇局核准件</td>
+    <td >本人有效身份证件</td>
+    <td  title="1">本人有效身份证件和有交易额的相关证明等材料</td>
+    <td >本人有效身份证件和外汇局核准件等材料</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one"  style='mso-height-source:userset;height:48pt' id='r72'>
+    <td>银行应配合外汇局对规避额度及真实性管理的个人及相关机构的核查，并在个人外汇业务监测系统推送相关信息之日起的（ ）天内，反馈个人结汇资金去向、购汇资金来源及外汇局要求的其他信息。</td>
+    <td >5</td>
+    <td >10</td>
+    <td  title="1">20</td>
+    <td >30</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r73'>
+    <td height='30'  style='height:22.5pt;'>对于个人分拆结售汇特征明显、银行能够确认为分拆结售汇行为的，（ ）。</td>
+    <td >银行应加强真实性审核，审核通过后方可办理</td>
+    <td >银行应根据经常项目项下收支真实性审核原则办理</td>
+    <td >银行应要求个人提交有交易额的相关证明材料后办理</td>
+    <td  title="1">银行应不予办理</td>
+    <td >1</td>
+    <td>D</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r74'>
+    <td height='30'  style='height:22.5pt;'>个人结售汇行为符合特征之一，但银行无法直接确认为分拆结售汇行为的，银行应（ ）。</td>
+    <td >不予办理</td>
+    <td  title="1">要求个人提交有交易额的相关证明材料后办理</td>
+    <td >要求个人提交外汇局的核准件后办理</td>
+    <td >要求个人提交个人有效身份证件后办理</td>
+    <td >1</td>
+    <td>B</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r75'>
+    <td height='30'  style='height:22.5pt;'>银行通过个人外汇业务监测系统为持外国人永久居留身份证的外籍人员办理结售汇业务时，证件类型应选择（ ）。</td>
+    <td  title="1">外国人永久居留身份证</td>
+    <td >护照</td>
+    <td >外国人所属国籍的身份证</td>
+    <td >护照或外国人所属国籍的身份证</td>
+    <td >1</td>
+    <td>A</td>
+</tr>
+<tr  class="one" height='16' style='mso-height-source:userset;height:12pt' id='r76'>
+    <td height='14'  style='height:10.5pt;'>以下不可能是国际收支统计间接申报主体的为（ ）。</td>
+    <td >境内居民个人</td>
+    <td >境内非居民</td>
+    <td  title="1">境内银行</td>
+    <td >境内非银行机构</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one" height='16' style='mso-height-source:userset;height:12pt' id='r77'>
+    <td height='14'  style='height:10.5pt;'>银行个人外汇买卖价差是指（ ）两个价格之差。</td>
+    <td >收盘价与开盘价</td>
+    <td >远期价与即期价</td>
+    <td >最高价与最低价</td>
+    <td  title="1">卖出价与买入价</td>
+    <td >1</td>
+    <td>D</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r78'>
+    <td height='30'  style='height:22.5pt;'>境内机构和个人向境外单笔支付等值5万美元以上（ ）的服务贸易外汇资金，应当按国家有关规定提交税务证明。</td>
+    <td >境内机构在境外发生的差旅费用</td>
+    <td >境内机构在境外代表机构的办公经费</td>
+    <td  title="1">境外个人在境内的工作报酬</td>
+    <td >境内机构发生在境外的进出口贸易佣金</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r79'>
+    <td height='46'  style='height:34.5pt;'>境内机构和个人向境外单笔支付等值5万美元以上的（ ）服务贸易外汇资金，无需提交《服务贸易等项目对外支付税务备案表》。</td>
+    <td >境外机构或个人从境内获得的融资租赁租金</td>
+    <td >境外个人在境内的工作报酬</td>
+    <td  title="1">保险项下保费、保险金等相关费用</td>
+    <td >境外机构或个人从境内获得的股权转让所得</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one" height='16' style='mso-height-source:userset;height:12pt' id='r80'>
+    <td height='14'  style='height:10.5pt;'>个人外汇结算账户的开立使用按（ ）账户进行管理。</td>
+    <td  title="1">机构</td>
+    <td >个人</td>
+    <td >经常</td>
+    <td >机构或个人</td>
+    <td >1</td>
+    <td>A</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r81'>
+    <td height='46'  style='height:34.5pt;'>（ ）个以上（含）不同个人同日、隔日或连续多日分别购汇后，将外汇汇给境外同一个人或机构的业务，即为达到外汇局定义的分拆结售汇特征。</td>
+    <td >2</td>
+    <td >3</td>
+    <td >4</td>
+    <td  title="1">5</td>
+    <td >1</td>
+    <td>D</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r82'>
+    <td height='30'  style='height:22.5pt;'>在个人结售汇管理信息系统发生故障时，外汇指定银行应严格按照（ ）办理个人结售汇业务。</td>
+    <td >《结汇、收汇及付汇管理规定》</td>
+    <td >《境内外汇账户管理规定》</td>
+    <td>内控制度</td>
+    <td  title="1">《个人结售汇管理信息系统应急预案》</td>
+    <td >1</td>
+    <td>D</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r83'>
+    <td height='30'  style='height:22.5pt;'>个人经常项目项下非经营性购汇，购汇资金来源（ ）。</td>
+    <td >人民币现钞</td>
+    <td >本人人民币账户和银行卡内资金</td>
+    <td >直系亲属人民币账户和银行卡内资金</td>
+    <td  title="1">以上都是</td>
+    <td >1</td>
+    <td>D</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r84'>
+    <td height='46'  style='height:34.5pt;'>对于境内机构和境内个人按照服务贸易外汇管理规定填报的服务贸易外汇收支管理信息，金融机构应于收款后（ ）工作日内及时、准确、完整地通过国际收支网上申报系统向外汇局报送。</td>
+    <td >3个</td>
+    <td >4个</td>
+    <td  title="1">5个</td>
+    <td >6个</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r85'>
+    <td height='30'  style='height:22.5pt;'>根据外汇管理规定，某个人客户收到境外T/T汇入的一笔赡家款，到银行办理结汇时使用（<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>）价格。</td>
+    <td >现钞买入价</td>
+    <td  title="1">现汇买入价</td>
+    <td >现钞卖出价</td>
+    <td >现汇卖出价</td>
+    <td >1</td>
+    <td>B</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r86'>
+    <td height='46'  style='height:34.5pt;'>以下属逃汇行为的是（ ）。</td>
+    <td  title="1">违反规定将境内外汇转移境外</td>
+    <td >以外汇收付应当以人民币收付的款项</td>
+    <td >以虚假、无效的交易单证等向经营结汇、售汇业务的金融机构骗购外汇</td>
+    <td >擅自对外借款</td>
+    <td >1</td>
+    <td>A</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r87'>
+    <td height='46'  style='height:34.5pt;'>以下属非法套汇行为的是（ ）。</td>
+    <td >以欺骗手段将境内资本转移境外的</td>
+    <td  title="1">以虚假、无效的交易单证等向经营结汇、售汇业务的金融机构骗购外汇</td>
+    <td >违反规定将境内外汇汇出或携带出境</td>
+    <td >擅自改变外汇用途</td>
+    <td >1</td>
+    <td>B</td>
+</tr>
+<tr class="one"  height='32' style='mso-height-source:userset;height:24pt' id='r88'>
+    <td height='30'  style='height:22.5pt;'>境内个人，是指中国公民和在中华人民共和国境内连续居住满（ ）的外国人，外国驻华外交人员和国际组织驻华代表除外。</td>
+    <td >6个月</td>
+    <td  title="1">1年</td>
+    <td >2年</td>
+    <td >3年</td>
+    <td >1</td>
+    <td>B</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r89'>
+    <td height='30'  style='height:22.5pt;'>境外个人旅游购物贸易方式下的结汇，凭本人有效身份证件及个人旅游购物（ ）办理。</td>
+    <td >出口收汇核销单</td>
+    <td >合同</td>
+    <td  title="1">报关单</td>
+    <td >发票</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr class="one"  height='48' style='mso-height-source:userset;height:36pt' id='r90'>
+    <td height='46'  style='height:34.5pt;'>居民个人购汇后，因故未出境，所购外汇（ ）。</td>
+    <td >可以全部提取现钞</td>
+    <td  title="1">年度总额内或外均可以保留现汇</td>
+    <td >必须结汇</td>
+    <td >年度总额内的可以保留现汇，年度总额外的不可以保留现汇，必须结汇</td>
+    <td >1</td>
+    <td>B</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r91'>
+    <td height='30'  style='height:22.5pt;'>境内个人超过年度总额办理购汇业务时，以下哪种材料可以作为超过额度购汇的证明材料在银行直接审核购汇（ ）。</td>
+    <td >在境外购买房屋的买卖合同</td>
+    <td >国内的工资收入证明</td>
+    <td  title="1">子女的境外留学学费及生活费证明</td>
+    <td >在境外投资公司的证明材料</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r92'>
+    <td height='30'  style='height:22.5pt;'>个人向外汇储蓄账户当日累计存入（ ）等值美元以下（含）的现钞，可以在银行直接办理。</td>
+    <td >3000</td>
+    <td >4000</td>
+    <td  title="1">5000</td>
+    <td >10000</td>
+    <td >1</td>
+    <td>C</td>
+</tr>
+<tr class="one"  height='32' style='mso-height-source:userset;height:24pt' id='r93'>
+    <td height='30'  style='height:22.5pt;'>对属于申报范围的境内居民通过进内银行与境内非居民发生的收付款，该由谁申报（ ）。</td>
+    <td  title="1">由境内居民申报</td>
+    <td >由境内银行代理境内非居民申报</td>
+    <td >境内居民和非居民分别申报</td>
+    <td >境内居民和非居民都不申报</td>
+    <td >1</td>
+    <td>A</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r94'>
+    <td height='30' class='x68' style='height:22.5pt;'>境内居民使用银联卡在境外提现消费，以及非居民在境内使用银联卡提现与消费的，应由（ ）。</td>
+    <td >境内居民申报</td>
+    <td >非居民申报</td>
+    <td  title="1">银联统一申报</td>
+    <td >无需申报</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one" height='16' class='x66' style='mso-height-source:userset;height:12pt' id='r95'>
+    <td height='14' class='x68' style='height:10.5pt;'>境内个人可凭（ ）向银行申请办理资产变现账户资金结汇。</td>
+    <td  title="1">相关业务登记凭证</td>
+    <td >外汇局相关核准件</td>
+    <td >股权转让协议</td>
+    <td >工商部门股权变更登记证明</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r96'>
+    <td height='46'  style='height:34.5pt;'>根据外汇管理规定，关于银行自身结售汇业务，下列说法正确的是（<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>）。</td>
+    <td class='x68'>银行经营业务中获得的外汇收入，参照货物贸易项下外汇管理可即时结汇</td>
+    <td class='x68'>银行当年外汇利润必须当年结汇</td>
+    <td class='x68'>银行收到债务人用以偿还外汇垫款的人民币资金后，不可自行办理购汇</td>
+    <td  title="1" class='x68'>银行资本金或营运资金本外币转换，由银行总行统一向外汇局申请</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r97'>
+    <td height='46' class='x68' style='height:34.5pt;'>个人本外币兑换特许机构办理单笔等值（ ）美元以上的兑换业务以及为同一日内兑换业务达到5笔的个人继续办理兑换业务，应实时登录个人结售汇系统录入有关信息。</td>
+    <td >100</td>
+    <td  title="1">500</td>
+    <td >1000</td>
+    <td >5000</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r98'>
+    <td height='46' class='x68' style='height:34.5pt;'>个人本外币兑换特许机构办理单笔等值（ ）美元以下的兑换业务，可在办理兑换业务24小时内补录，备注栏注明“特许兑换补录”。</td>
+    <td >100</td>
+    <td  title="1">500</td>
+    <td >1000</td>
+    <td >5000</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r99'>
+    <td height='46' class='x68' style='height:34.5pt;'>开户银行应将与个人本外币兑换特许机构间人民币与外币的兑换交易（不同外币间的兑换交易除外）纳入银行结售汇统计。其中交易主体为非居民个人，交易性质为（ ）。</td>
+    <td  title="1">旅游</td>
+    <td >咨询服务</td>
+    <td >其他服务</td>
+    <td >其他经常转移</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='48' style='mso-height-source:userset;height:36pt' id='r100'>
+    <td height='46' class='x68' style='height:34.5pt;'>个人本外币兑换特许机构境外汇局批准可选择在包括其人民币基本存款账户开户银行在内，原则上不多于（ ）家同城银行开立外币备付金账户。</td>
+    <td >1</td>
+    <td >2</td>
+    <td  title="1">3</td>
+    <td >4</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r101'>
+    <td height='46' class='x68' style='height:34.5pt;'>个人本外币兑换特许机构可将同城人民币基本存款账户资金划转至人民币备付金账户，也可将人民币备付金账户资金划转至同城人民币基本存款账户，每月限各办理（ ）次。</td>
+    <td  title="1">1</td>
+    <td >2</td>
+    <td >3</td>
+    <td >4</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r102'>
+    <td height='30' class='x68' style='height:22.5pt;'>境内非金融机构申请办理个人本外币兑换特许业务，需满足经营外币代兑业务（ ）以上。</td>
+    <td >3个月</td>
+    <td  title="1">6个月</td>
+    <td >1年</td>
+    <td >2年</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r103'>
+    <td height='46' class='x68' style='height:34.5pt;'>如果直系亲属代为办理年度总额度内购汇、结汇的，须提供：直系亲属关系证明、委托人身份证明材料、受托人身份证明材料以及（ ）。</td>
+    <td >户口簿</td>
+    <td >亲属关系公证书</td>
+    <td >超额结售汇证明材料</td>
+    <td  title="1">委托人授权书</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r104'>
+    <td height='46' class='x68' style='height:34.5pt;'>《个人外汇管理办法》及《个人外汇管理实施细则》中所指的直系亲属证明关系为：户口簿、结婚证、公安部门或公证部门出具的有效亲属关系证明和（ ）。</td>
+    <td >单位出具的有效亲属关系证明</td>
+    <td  title="1">街道办事处等政府基层组织出具的有效亲属关系证明</td>
+    <td >居委会出具的有效亲属关系证明</td>
+    <td >护照</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r105'>
+    <td height='30' class='x68' style='height:22.5pt;'>银行为客户办理个人结售汇业务时，必须先登录（ ）查询客户结售汇信息后，再为客户办理结售汇业务。</td>
+    <td >核心系统</td>
+    <td  title="1">个人结售汇系统</td>
+    <td >个人客户身份识别与资料管理系统</td>
+    <td >联网核查公民身份信息系统</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='32' style='mso-height-source:userset;height:24pt' id='r106'>
+    <td height='30' class='x68' style='height:22.5pt;'>境外个人在办理个人结售汇业务，由于名字过长，银行业务人员在“个人结售汇系统”（ ）录入姓名全位。</td>
+    <td  title="1">“个人结售汇系统”“备注”栏</td>
+    <td >“个人结售汇系统”“空白处”</td>
+    <td >无需注明</td>
+    <td >以上全部正确</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r107'>
+    <td height='30' class='x68' style='height:22.5pt;'>境内个人超过年度总额办理个人结售汇业务时，按照职工报酬结汇需向银行提供（ ）。</td>
+    <td >入学通知书及费用单据</td>
+    <td >保险支付凭证</td>
+    <td >有交易金额的消费单</td>
+    <td  title="1">劳务合同及收入证明（完税证明）</td>
+    <td >1</td>
+    <td >D</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r108'>
+    <td height='46' class='x68' style='height:34.5pt;'>境外个人将原兑换未使用完的人民币兑回外币现钞时，等值500美元以内兑换可凭本人有效证件在银行办理兑回，超过规定金额需凭（ ）在银行办理兑回。</td>
+    <td >消费单据</td>
+    <td  title="1">24个月内的原兑换水单</td>
+    <td >收入证明材料</td>
+    <td >劳务合同</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r109'>
+    <td height='30' class='x68' style='height:22.5pt;'>境外个人办理个人结汇业务，经办员在录入“个人结售汇系统”时，以下结汇资金属性不可以选择的是（ ）。</td>
+    <td >旅游</td>
+    <td  title="1">投资收益</td>
+    <td >其他经常转移</td>
+    <td >直接投资</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr class="one"  height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r110'>
+    <td height='30' class='x68' style='height:22.5pt;'>录入“个人结售汇系统”时，港澳居民证件号码应录入“港澳往来大陆通行证”中含首位字母在内的（ ）位证件号码。</td>
+    <td >前8位</td>
+    <td  title="1">前9位</td>
+    <td >全部号码</td>
+    <td >除0以外的号码</td>
+    <td >1</td>
+    <td >B</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r111'>
+    <td height='30' class='x68' style='height:22.5pt;'>录入“个人结售汇系统”时，台湾居民证件号码应录入“台湾往来大陆通行证”中（ ）位号码。</td>
+    <td  title="1">前8位</td>
+    <td >前9位</td>
+    <td >全部号码</td>
+    <td >除0以外的号码</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="one" height='16' class='x66' style='mso-height-source:userset;height:12pt' id='r112'>
+    <td height='14' class='x68' style='height:10.5pt;'>境外个人购汇时，购汇种类不应选择（ ）。</td>
+    <td >境外个人原币兑回</td>
+    <td >职工报酬和赡家款</td>
+    <td  title="1">旅游</td>
+    <td >以上全部错误</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one" height='32' class='x66' style='mso-height-source:userset;height:24pt' id='r113'>
+    <td height='30' class='x68' style='height:22.5pt;'>境外个人购买境内商品房结汇时，在录入“个人结售汇系统”时，应选择结汇资金属性（ ）。</td>
+    <td >旅游</td>
+    <td >职工报酬与赡家款</td>
+    <td title="1" >直接投资</td>
+    <td >其他经常转移</td>
+    <td >1</td>
+    <td >C</td>
+</tr>
+<tr  class="one" height='48' class='x66' style='mso-height-source:userset;height:36pt' id='r114'>
+    <td height='46' class='x68' style='height:34.5pt;'>根据国家外汇管理局《金融机构外汇业务数据采集规范（1.0版）》（汇发[2014]18号），银行无需向外汇局报送的账户信息是（ ）。</td>
+    <td title="1" >境内个人开立的外汇储蓄账户</td>
+    <td >境内个人开立的个人外汇结算账户</td>
+    <td >境内个人开立的个人资本项目外汇账户</td>
+    <td >境内非银行机构、境外机构及境外个人在境内银行开立的外汇账户</td>
+    <td >1</td>
+    <td >A</td>
+</tr>
+<tr  class="other" height='80' class='x66' style='mso-height-source:userset;height:60pt' id='r115'>
+    <td height='78'  style='height:58.5pt;'>银行为个人办理个人外汇业务前，应对客户身份进行确认，境外个人审核（）</td>
+    <td  title="1">居住在境内或境外的中国籍华侨，审核本人中国护照和境外永久居留证。</td>
+    <td  title="1">香港、澳门特别行政区居民，审核港澳居民往来内地通行证；台湾居民，审核台湾居民往来大陆通行证。</td>
+    <td  title="1">外国公民，审核本人护照或外国人永久居留身份证（外国边民，按照边贸结算的有关规定办理）。</td>
+    <td  title="1">外交人员，审核我国外交部发给各国驻华大使馆、各国际组织驻华代表机构人员身份证件，包括外交人员证、行政技术人员证、国际组织人员证三类证件。</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='96' style='mso-height-source:userset;height:72pt' id='r116'>
+    <td height='94'  style='height:70.5pt;'>境内个人(<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>)</td>
+    <td  title="1">居住在中国境内16岁（含）以上的中国公民，审核本人居民身份证</td>
+    <td  title="1">原则上居住在中国境内16岁以下的中国公民应由监护人代理办理外汇业务，审核监护人有效身份证件以及账户持有人的居民身份证或户口簿</td>
+    <td title="1">现役军人、人民武装警察，审核本人居民身份证。尚未领取居民身份证的，除审核军人身份证或武装警察身份证外，还应审核其军人保障卡或所在单位开具的尚未领取居民身份证的证明材料。</td>
+    <td>居住在中国境内18岁（含）以上的中国公民，审核本人居民身份证</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr   class="other" style='mso-height-source:userset;height:48pt' id='r117'>
+    <td height='62'  style='height:46.5pt;'>如银行在办理客户身份确认过程中，在审核上述身份证明资料后，仍无法有效确认客户基本情况的，可要求客户提供辅助身份证明材料,必要时可拒绝其办理业务申请。辅助身份证明材料包括但不限于(<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>)</td>
+    <td  title="1">境内个人为户口簿、护照、机动车驾驶证、居住证、社会保障卡、公安机关出具的户籍证明、工作证；</td>
+    <td title="1">香港、澳门特别行政区居民为香港、澳门特别行政区居民身份证</td>
+    <td  title="1">台湾地区居民为在台湾居住的有效身份证明</td>
+    <td  title="1">定居国外的中国公民为定居国外的证明文件</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r118'>
+    <td height='46'  style='height:34.5pt;'>关注客户是指（<span style='mso-spacerun:yes;'>&nbsp; </span>）</td>
+    <td title="1">除按《总则》标准确定的关注客户外，已被外汇局列为“关注名单”的个人</td>
+    <td title="1">除按《总则》标准确定的关注客户外，已被外汇局列为“预关注”的个人</td>
+    <td  title="1">被其他监管部门列为黑名单</td>
+    <td  title="1">被法院列为失信人员的个人应列为关注客户</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr class="other"  height='96' style='mso-height-source:userset;height:72pt' id='r119'>
+    <td height='94'  style='height:70.5pt;'>具有以下特征的分拆业务所涉及客户也应列为关注客户(<span style='mso-spacerun:yes;'>&nbsp; </span>)</td>
+    <td  title="1">5个以上（含）不同个人同日、隔日或连续多日分别购汇后，将外汇汇给境外同一个人或机构。</td>
+    <td  title="1">境外同一个人或机构同日、隔日或连续多日将外汇汇给境内5个以上（含）不同个人，收款人分别结汇。</td>
+    <td  title="1">5个以上（含）不同个人同日、隔日或连续多日分别结汇后，将人民币资金存入或汇入同一个人或机构的人民币账户。</td>
+    <td >个人在7日内从同一外汇储蓄账户5次以上（不含）提取接近等值1万美元外币现钞；或者5个以上（不含）个人同一日内，共同在同一银行网点，每人办理接近等值5千美元现钞结汇。</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr class="other"  height='32' style='mso-height-source:userset;height:24pt' id='r120'>
+    <td height='30'  style='height:22.5pt;'>个人有效身份证件包括（<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>)</td>
+    <td  title="1">身份证、户口本</td>
+    <td  title="1">外国护照、外国永久居留证、外国人永久居留身份证</td>
+    <td  title="1">港澳居民往来内地通行证、台湾居民往来大陆通行证</td>
+    <td  title="1">外交人员证、行政技术人员证、国际组织人员证</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r121'>
+    <td height='46'  style='height:34.5pt;'>直系亲属关系证明包括(<span style='mso-spacerun:yes;'>&nbsp; </span>)</td>
+    <td  title="1">能证明直系亲属关系的户口簿、结婚证、出生证明</td>
+    <td  title="1">街道办事处等政府基层组织或公安部门、公证部门出具的有效亲属关系证明</td>
+    <td >工作单位出具的有效亲属关系证明</td>
+    <td  title="1">境外个人凭大使馆出具的相关证明文件</td>
+    <td >2</td>
+    <td >ABD</td>
+</tr>
+<tr  class="other" height='80' style='mso-height-source:userset;height:60pt' id='r122'>
+    <td height='78'  style='height:58.5pt;'>银行对客户提供的身份证明、业务状况等资料的真实性、合法性及有效性进行核实的方式包括(<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>)</td>
+    <td title="1" style='overflow:hidden;'>可以通过外汇局行政处罚信息公开查询结果以及各政府机关、监管部门和银行内部的“黑名单”进行资质审核</td>
+    <td title="1" style='overflow:hidden;'>通过联网核查公民身份信息系统、征信系统、工商登记系统、法院被执行人公示系统、实地察访、海外联行或母行协查认证等方式，查询或核实客户身份信息</td>
+    <td title="1">如有必要，可核实过程和结果以书面、电子等其他形式记录存档</td>
+    <td >电话询问</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r123'>
+    <td height='46' style='height:34.5pt;overflow:hidden;'>《服务贸易等项目对外支付税务备案表》（对外支付时提供）审核注意事项（<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>）</td>
+    <td title="1">备案信息应与申请支付项目一致</td>
+    <td title="1">《服务贸易等项目对外支付税务备案表》应加盖主管国税机关印章</td>
+    <td title="1" style='overflow:hidden;'>《服务贸易等项目对外支付税务备案表》中本次付汇金额应大于或等于实际支付金额</td>
+    <td title="1">同一笔合同需要多次对外支付的，应要求客户在每次付汇前办理税务备案手续</td>
+    <td >2</td>
+    <td>ABCD</td>
+</tr>
+<tr  class="other" height='80' style='mso-height-source:userset;height:60pt' id='r124'>
+    <td height='78' style='height:58.5pt;'>银行为客户办理外汇业务应进行尽职审查。具体要求包括(<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>)</td>
+    <td>对于关注客户，额度内的业务审核后仍不得办理</td>
+    <td title="1">依据外汇管理政策法规对业务合规性进行审查</td>
+    <td  title="1" style='overflow:hidden;'>了解业务的交易性质、目的及背景等信息，并对业务背景的真实性与合理性进行审核，涉及外汇收支的，还应对交易背景与外汇收支一致性进行合理审查</td>
+    <td title="1">重点关注大额、高频、分拆等可疑交易，对于客户身份存疑、交易背景存疑、交易凭证存疑等情况，应执行更严格的交易真实性审核标准。</td>
+    <td >2</td>
+    <td >BCD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r125'>
+    <td height='30' style='height:22.5pt;'>以下哪些情况银行应审慎或拒绝办理：（<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>）</td>
+    <td  title="1" style='overflow:hidden;'>客户身份不明或对客户身份有疑问的</td>
+    <td  title="1" style='overflow:hidden;'>以往获取的客户身份信息真实性有误或出现重大变更的</td>
+    <td  title="1">交易资金来源或去向可疑的</td>
+    <td title="1">交易性质、目的、背景等信息异常，需进一步调查的</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r126'>
+    <td height='30'  style='height:22.5pt;'>个人外汇储蓄账户的收支范围为（<span style='mso-spacerun:yes;'>&nbsp; </span>）</td>
+    <td  title="1">非经营性外汇收付</td>
+    <td title="1">本人或其直系亲属之间同一主体类别的外汇储蓄账户间的资金划转</td>
+    <td >经营性外汇收付</td>
+    <td >资本项目外汇收付</td>
+    <td >2</td>
+    <td >AB</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r127'>
+    <td height='30' style='height:22.5pt;'>个人开立个人银行账户必须落实实名制。银行账户实名制包括四个要素（<span style='mso-spacerun:yes;'>&nbsp; </span>）</td>
+    <td  title="1" style='overflow:hidden;'>银行账户名称与身份证件名称的一致性</td>
+    <td  title="1">存款人真实意愿的表示</td>
+    <td  title="1">身份证件的有效性</td>
+    <td  title="1">单位、住所的真实性</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other"  style='mso-height-source:userset;height:48pt' id='r128'>
+    <td>外汇储蓄账户代理开户审核(<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>)</td>
+    <td  title="1" style='overflow:hidden;'>个人开立银行账户原则上由本人亲自办理</td>
+    <td  title="1">如确有需要的，可委托他人办理</td>
+    <td title="1">委托他人开立银行账户不得开通电子渠道类等远程付款功能,如存款人本人到银行重新核实身份的，可以解除上述限制。</td>
+    <td >必须本人办理</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr  class="other" height='16' style='mso-height-source:userset;height:12pt' id='r129'>
+    <td height='14'  style='height:10.5pt;'>委托他人代理开户的,应出具(<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>)</td>
+    <td  title="1">代理人的有效实名制身份证件</td>
+    <td  title="1">被代理人的有效实名制身份证件</td>
+    <td >代理人的书面授权委托</td>
+    <td  title="1">被代理人的书面授权委托</td>
+    <td >2</td>
+    <td >ABD</td>
+</tr>
+<tr   class="other" style='mso-height-source:userset;height:48pt' id='r130'>
+    <td height='62'  style='height:46.5pt;'>代理开立账户的，银行必须(<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>)</td>
+    <td title="1">联系被代理人进行核实，核实无误后方可办理业务。</td>
+    <td title="1">若代理人代理他人在银行开立账户较为频繁的，则应审核代理业务的合理性、必要性，无合理性的应拒绝办理。</td>
+    <td title="1">对于关注客户，银行原则上应拒绝办理代理业务，必须本人办理。</td>
+    <td>对于关注客户，银行原则上可以办理代理业务。</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr  class="other" height='80' style='mso-height-source:userset;height:60pt' id='r131'>
+    <td height='78' style='height:58.5pt;'>个人外币现钞存款业务（<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>）</td>
+    <td>外币现钞存入当日累计等值10000美元（含）以下的，审核本人有效证件。</td>
+    <td title="1" style='overflow:hidden;'>外币现钞存入当日累计等值5千美元以上的，审核本人的有效证件、经海关签章的《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行外币现钞提取单据。</td>
+    <td>委托他人办理的，还应审核委托人、代理人的有效身份证件复印件，委托人的授权书。</td>
+    <td title="1">外交人员凭外交人员证件办理，金额不受限制。</td>
+    <td >2</td>
+    <td >BD</td>
+</tr>
+<tr  class="other" height='112' style='mso-height-source:userset;height:84pt' id='r132'>
+    <td height='110' style='height:82.5pt;'>个人外币现钞存款业务审核原则及要点（<span style='mso-spacerun:yes;'>&nbsp; </span>）</td>
+    <td title="1">存入外币是否超过现行外汇管理规定的限额：外币现钞当日累计等值5千美元以上的，审核经海关签章的《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行（境内银行）外币现钞提取单据材料的真实性和一致性。</td>
+    <td title="1">存入的金额不得超过经海关签章的本人《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行（境内银行）外币现钞提取单据上标注的金额。</td>
+    <td title="1">银行经办人员应在客户提供的原单据上签注（存款金额、日期和经办网点）并加盖业务印章或业务戳记后，复印留存。</td>
+    <td title="1">银行应关注取款凭条的打印次数，了解是否存在重复打印情况。</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other"  style='mso-height-source:userset;height:48pt' id='r133'>
+    <td>个人外币现钞取款业务审核材料(<span style='mso-spacerun:yes;'>&nbsp;&nbsp;&nbsp; </span>)</td>
+    <td title="1">外币现钞提取当日累计等值1万美元（含）以下的，凭本人有效证件办理。</td>
+    <td title="1" style='overflow:hidden;'>外币现钞提取当日累计等值1万美元以上的，须审核本人有效证件、经办银行所在地外汇局签章的《提取外币现钞备案表》。</td>
+    <td title="1">委托他人办理的，还应审核委托人、代理人的有效身份证件，委托人的授权书。</td>
+    <td title="1">外交人员凭外交人员证件办理，金额不受限制。</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='80' style='mso-height-source:userset;height:60pt' id='r134'>
+    <td height='78' style='height:58.5pt;'>个人外币现钞取款业务审核原则及要点(<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>)</td>
+    <td title="1">查询提取外币是否超过现行外汇管理规定的限额, 当日累计等值1万美元以上外币取款，必须有所在地外汇局签章的《提取外币现钞备案表》</td>
+    <td>结算账户可以提取外币现钞</td>
+    <td title="1">境外卡在境内可以到境内银行柜台提取外币现钞，但不得在自动柜员机上提取外币现钞</td>
+    <td title="1" ><font class="font20">对于关注客户，应加强提钞用途真实性审核，</font><font class="font19">原则上应拒绝办理代理业务</font></td>
+    <td >2</td>
+    <td >ACD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r135'>
+    <td height='30' style='height:22.5pt;'>个人办理个人电子银行业务时，应遵循了解你的业务和尽职调查等展业原则，了解客户（ ）。</td>
+    <td  title="1">资金来源</td>
+    <td  title="1">交易目的</td>
+    <td >资金去向</td>
+    <td  title="1">交易性质</td>
+    <td >2</td>
+    <td >ABD</td>
+</tr>
+<tr  class="other" height='96' style='mso-height-source:userset;height:72pt' id='r136'>
+    <td height='94' style='height:70.5pt;'>外汇携带证开立业务,下面描述正确的为（ ）</td>
+    <td  title="1" style='overflow:hidden;'>个人携带超过规定数额的外币现钞出境，需申领《携带外汇出境许可证》，海关凭《携带证》验放</td>
+    <td title="1">拥有合法、有效身份证件，与银行建立有效客户关系的个人客户，并有实际出境需求</td>
+    <td  title="1" style='overflow:hidden;'>客户携带金额在等值5千美元以上至1万美元（含）的, 银行应审核个人原提钞银行开立的存款证明（利息清单或取款凭条）或相关购汇凭证、护照或往来港澳通行证、往来台湾通行证、有效签证和签注</td>
+    <td title="1">办理外币携带证资金来源如从直系亲属外汇账户中提取外币现钞的，还应提供直系亲属关系证明</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r137'>
+    <td height='46'  style='height:34.5pt;'>银行审核客户提供的交易凭证，下面描述正确的是（<span style='mso-spacerun:yes;'>&nbsp; </span>）</td>
+    <td title="1">交易凭证应真实有效，要素齐全，不存在明显瑕疵和虚假及重复使用等情况。</td>
+    <td  title="1" style='overflow:hidden;'>客户提交的凭证和商业单据应当符合国家有关法规规定</td>
+    <td  title="1" style='overflow:hidden;'>由客户单方面提供的交易凭证、通过网络下载或传真的交易凭证，应由客户签字证明</td>
+    <td>原则上应留存交易凭证原件，对无法留存原件的，银行可直接复印留存</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr  class="other" height='160' style='mso-height-source:userset;height:120pt' id='r138'>
+    <td height='158'  style='height:118.5pt;'>关于持续监测，正确的为（<span style='mso-spacerun:yes;'>&nbsp; </span>）</td>
+    <td title="1" >银行应严格按照外汇管理相关规定要求，银行与客户建立外汇业务关系或与其进行外汇交易时，应采取审慎有效措施识别客户真实身份，对交易的真实性与合法性进行尽职审查,识别并定期更新客户身份信息。</td>
+    <td title="1" >银行办理外汇业务或后续监测中发现客户存在涉嫌违反外汇管理法规、规避监管行为的，应当及时向所在地外汇局报告可疑情况。</td>
+    <td>银行应妥善保存客户身份资料和交易记录。在业务关系存续期间，客户身份资料发生变更的，应当及时更新客户身份资料。业务关系结束后，所有客户身份资料和交易记录应合理、规范保存至少10年备查。单次发生的业务，保存期限自业务发生之日起计算，持续发生的业务，保存期限自业务终了之日起计算。</td>
+    <td title="1" >客户外汇业务存续关系期间，银行应持续关注客户的业务变化情况，对客户进行动态管理，对交易进行持续详细审查。</td>
+    <td >2</td>
+    <td >ABD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r139'>
+    <td height='46' style='height:34.5pt;'>关于外汇储蓄账户正确的为（<span style='mso-spacerun:yes;'>&nbsp; </span>）</td>
+    <td>个人外汇储蓄账户是指用于个人经营性外汇收支的账户</td>
+    <td title="1" >办理时应区分主体为境内个人还是境外个人</td>
+    <td>对于境内个人和境外个人开立的联名账户，按境外个人外汇储蓄账户进行管理。</td>
+    <td title="1" >个人外汇储蓄账户与本人或其直系亲属之间同一主体类别的外汇储蓄账户间的资金可以划转。</td>
+    <td >2</td>
+    <td >BD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r140'>
+    <td height='30'  style='height:22.5pt;'>以下哪几类个人享有年度购汇便利额度（）</td>
+    <td  title="1" >持中国居民身份证的个人。</td>
+    <td  title="1" >持外国人永久居留身份证的个人。</td>
+    <td >持外国护照的个人。</td>
+    <td>持港澳居民往来内地通行证的个人。</td>
+    <td >2</td>
+    <td >AB</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r141'>
+    <td height='46'  style='height:34.5pt;'>年度总额内个人结售汇业务审核材料(<span style='mso-spacerun:yes;'>&nbsp; </span>)</td>
+    <td  title="1" >本人有效身份证件。</td>
+    <td>代为办理的，审核委托人和受托人的有效身份证件、直系亲属关系证明等材料。</td>
+    <td title="1" >境内个人购汇时，还需填写《个人购汇申请书》。</td>
+    <td title="1" >代为办理的，审核委托人和受托人的有效身份证件、委托人授权书、直系亲属关系证明等材料。</td>
+    <td >2</td>
+    <td >ACD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r142'>
+    <td height='30' style='height:22.5pt;'>年度总额内个人结售汇业务代办业务，只能由直系亲属（ ）代为办理。</td>
+    <td  title="1" >父母</td>
+    <td  title="1" >配偶</td>
+    <td  title="1" >子女</td>
+    <td >祖父母</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r143'>
+    <td height='30' class='x84' style='height:22.5pt;overflow:hidden;'>关于境内个人超过年度总额的非经营性结汇业务表述正确的是（ ）。</td>
+    <td>捐赠收入结汇：需提交捐赠协议或合同</td>
+    <td title="1" >赡家款收入结汇：需提交银行存款证明、个人收入纳税凭证等</td>
+    <td  title="1"  style='overflow:hidden;'>专有权利使用和特许收入结汇：需提交付款证明、协议或合同</td>
+    <td title="1" >职工报酬收入结汇：需提交雇佣合同和收入证明</td>
+    <td >2</td>
+    <td >BCD</td>
+</tr>
+<tr class="other" height='48' style='mso-height-source:userset;height:36pt' id='r144'>
+    <td height='46' class='x84' style='height:34.5pt;overflow:hidden;'>关于境内个人超过年度总额的非经营性结汇业务表述错误的是（ ）。</td>
+    <td><font class="font19">应对</font><font class="font20">外汇资金来源进行审查，重点审核有交易额的证明材料的真实性和一致性。</font></td>
+    <td title="1" ><font class="font20">对不能留存纸质原件的，</font><font class="font19">银行应在相关交易材料原件上签注（金额、日期和经办网点），复印留存</font><font class="font20">。</font></td>
+    <td title="1" >捐赠、保险业务须符合国家规定。境内个人可以购买境外的人寿险、投资返还分红类保险。</td>
+    <td >对于关注客户，银行原则上应拒绝办理代理业务，应提高交易凭证的审核标准。</td>
+    <td >2</td>
+    <td >BC</td>
+</tr>
+<tr class="other"  height='32' style='mso-height-source:userset;height:24pt' id='r145'>
+    <td height='30' style='height:22.5pt;overflow:hidden;'>境内个人办理超过年度总额的保险外汇收入结汇业务，应提供(<span style='mso-spacerun:yes;'>&nbsp; </span>)。</td>
+    <td  title="1" >保险合同</td>
+    <td >原保险缴费凭证</td>
+    <td  title="1" >保险经营机构的付款证明</td>
+    <td >个人收入纳税凭证</td>
+    <td >2</td>
+    <td >AC</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r146'>
+    <td height='46' style='height:34.5pt;'>关于境外个人超过年度总额的非经营性结汇业务正确的是（）。</td>
+    <td  title="1" style='overflow:hidden;'>用于房租类支出的结汇：经房屋管理部门登记的房屋租赁合同、发票或支付通知.</td>
+    <td title="1" >用于生活消费类支出的结汇：合同或发票。</td>
+    <td  title="1" style='overflow:hidden;'>用于就医、学习支出的结汇：境内医院（学校）收费证明。</td>
+    <td title="1" >用于其它支出的真实性结汇：相关证明、支付凭证。</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr   class="other" style='mso-height-source:userset;height:48pt' id='r147'>
+    <td>关于境外个人超过年度总额的非经营性结汇业务审核原则及要点错误是（）。</td>
+    <td>应对客户结汇用途进行审查，重点审核有交易额的证明材料的真实性和一致性。</font></td>
+    <td title="1" >对于关注客户，银行拒绝办理代理业务。</td>
+    <td>办理结汇业务前，应将此笔结汇准确、完整地录入</font><font class="font20">“个人外汇业务系统”，备注栏注明审核材料的主要信息</font><font class="font19">。</font></td>
+    <td title="1" >结汇单笔等值5万美元以上的，应将结汇所得人民币资金直接划转至境外个人本人的人民币账户。</td>
+    <td >2</td>
+    <td >BD</td>
+</tr>
+<tr  class="other" height='16' style='mso-height-source:userset;height:12pt' id='r148'>
+    <td height='14'  style='height:10.5pt;overflow:hidden;'>外交人员凭外交人员证件办理以下哪些业务，金额不受限制。（）</td>
+    <td  title="1" >外币现钞存入储蓄账户</td>
+    <td  title="1" >从外汇储蓄账户提取外币现钞</td>
+    <td  title="1" >非经营性结汇业务</td>
+    <td  title="1" >非经营性购汇业务。</td>
+    <td >2</td>
+    <td>ABCD</td>
+</tr>
+<tr  class="other" height='96' style='mso-height-source:userset;height:72pt' id='r149'>
+    <td height='94' style='height:70.5pt;overflow:hidden;'>36.本年度未超过年度结汇总额的个人手持外币现钞结汇,错误的是（）。</td>
+    <td title="1" >当日外币现钞结汇累计金额在等值1万美元以下（含）的，凭本人的有效身份证件办理。</td>
+    <td>当日外币现钞结汇累计金额在等值5千美元以下（含）的，凭本人的有效身份证件办理。</td>
+    <td>当日累计金额超过等值5千美元的, 凭本人的有效身份证件、经海关签章的本人《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行外币现钞提取单据办理。</td>
+    <td title="1" >当日累计金额超过等值1万美元的, 凭本人的有效身份证件、经海关签章的本人《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行外币现钞提取单据办理。</td>
+    <td >2</td>
+    <td >AD</td>
+</tr>
+<tr  class="other"  style='mso-height-source:userset;height:48pt' id='r150'>
+    <td height='62' style='height:46.5pt;'><font class="font20">境外个人</font><font class="font19">本年度已超过年度结汇总额的经常项目项下个人手持外币现钞结汇,需审核（）。</font></td>
+    <td title="1" >境外个人本人的有效身份证件。</td>
+    <td  title="1" style='overflow:hidden;'>境外个人超过年度总额的非经营性结汇规定材料</td>
+    <td title="1" >经海关签章的本人《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行外币现钞提取单据。</td>
+    <td>经办行所在地外管局签章的《提取外币现钞备案表》。</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr class="other"  height='80' style='mso-height-source:userset;height:60pt' id='r151'>
+    <td height='78'  style='height:58.5pt;'><font class="font20">银行办理个人手持外币现钞结汇业务有哪些</font><font class="font19">风险需注意(<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>)</font></td>
+    <td  title="1"  style='overflow:hidden;'>客户身份不明或对客户身份有疑问的。</td>
+    <td title="1" >以往获取的客户身份信息真实性有误或出现重大变更的。</td>
+    <td title="1" >结汇资金来源可疑的。</td>
+    <td>关注分拆交易，应从分拆结汇的必要性和合理性等角度进行尽职审查。发现分拆等可疑迹象，应于发现之日起5个工作日内向当地外汇局报告。</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r152'>
+    <td height='46' style='height:34.5pt;overflow:hidden;'><font class="font19">39.</font><font class="font20">境内个人</font><font class="font19">超过年度总额非经营性购汇业务中自费出境学习学费或生活费的交易凭证包括（<span style='mso-spacerun:yes;'>&nbsp; </span>）。</font></td>
+    <td  title="1" >本人的有效身份证件</td>
+    <td title="1" >境外学校录取通知书（购买第二学年或学期以后的学费或是生活费无需提供）</td>
+    <td  title="1"  style='overflow:hidden;'>境外学校相应年度或学期学费证明或生活费用证明</td>
+    <td  title="1" >本人因私护照及有效签证（或签注）</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r153'>
+    <td height='30' style='height:22.5pt;overflow:hidden;'><font class="font19">39.</font><font class="font20">境内个人</font><font class="font19">超过年度总额非经营性购汇业务中自费出境学习保证金购汇的交易凭证不包括（<span style='mso-spacerun:yes;'>&nbsp; </span>）。</font></td>
+    <td >本人因私护照</td>
+    <td  title="1" >国际组织缴费通知</td>
+    <td  title="1" >境外培训费用证明</td>
+    <td >境外学校学费证明或生活费用证明</td>
+    <td >2</td>
+    <td >BC</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r154'>
+    <td height='30' style='height:22.5pt;overflow:hidden;'><font class="font19">39.</font><font class="font20">境内个人因</font><font class="font19">境外直系亲属救助办理超过年度总额非经营性购汇业务只适用于以下哪几种情况（<span style='mso-spacerun:yes;'>&nbsp; </span>）。</font></td>
+    <td title="1"  >直系亲属在境外发生疾病</td>
+    <td  title="1" >直系亲属在境外发生死亡</td>
+    <td  title="1" >直系亲属在境外购房</td>
+    <td >直系亲属在境外发生意外灾难</td>
+    <td >2</td>
+    <td >ABD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r155'>
+    <td height='30' style='height:22.5pt;'><font class="font19">持《外国人永久居留身份证》的境外个人</font><font class="font20">以下哪几种情况可办理购汇（<span style='mso-spacerun:yes;'>&nbsp; </span>）。</font></td>
+    <td ><font class="font20">凭</font><font class="font19">外国护照办理占额度的购汇业务</font></td>
+    <td title="1" ><font class="font20">凭</font><font class="font19">《外国人永久居留身份证》办理占额度的购汇业务</font></td>
+    <td title="1"  style='overflow:hidden;'>凭境内合法的人民币收入证明材料“提供凭证的经常项下其他购汇”</td>
+    <td title="1" >凭原兑换水单办理“提供凭证的经常项下其他购汇”</td>
+    <td >2</td>
+    <td >BCD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r156'>
+    <td height='46'  style='height:34.5pt;'>境外个人境内合法的人民币收入购汇描述正确的（<span style='mso-spacerun:yes;'>&nbsp; </span>）。</td>
+    <td title="1" >离休金、离职金、退休金、退职金、抚恤金购汇：款项发放单位证明文件。</td>
+    <td title="1" >职工报酬购汇：雇佣或劳务合同或就业证明、用人单位出具的收入清单、完税证明。</td>
+    <td >原兑换水单。</td>
+    <td title="1" >其他合法经常项目收入购汇:收入来源证明材料、完税证明。</td>
+    <td >2</td>
+    <td >ABD</td>
+</tr>
+<tr  class="other"  style='mso-height-source:userset;height:48pt' id='r157'>
+    <td height='62' style='height:46.5pt;'>境外个人原币兑回购汇业务审核原则及要点,下述正确（ ）。</td>
+    <td title="1" >原兑换未用完的人民币指外币现钞、信用卡、旅行支票结汇后未用完的人民币。</td>
+    <td title="1" >原兑换水单必须是正本，必须真实、有效（有效期从兑换之日起24个月），兑回的金额不能超过原兑换金额。</td>
+    <td>凭本人有效身份证件办理单笔或当日累计兑换不超过等值1000美元（含）的原币兑回。</td>
+    <td>凭本人有效身份证件办理离境前在境内关外场所当日累计不超过等值500美元（含）的原币兑回。</td>
+    <td >2</td>
+    <td >AB</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r158'>
+    <td height='46'  style='height:34.5pt;'>境外个人购汇业务审核原则及要点,下述错误的是（ ）。</td>
+    <td>个人所购外汇，可以汇出境外、存入本人外汇储蓄账户、或按规定携带出境。</td>
+    <td title="1" >存入本人外汇储蓄账户的银行应审核购汇人与存款账户所有人是否一致，非本人储蓄账户可入账；</td>
+    <td>携带外币出境的银行须按照外币现钞管理及外币携带出境的相关规定办理</td>
+    <td title="1" >个人所购外汇，可以汇出境外、存入本人外汇储蓄账户,不可携带出境。</td>
+    <td >2</td>
+    <td >BD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r159'>
+    <td height='46' style='height:34.5pt;'>除以下（<span style='mso-spacerun:yes;'>&nbsp; </span>）情况外，客户主动发起的结售汇交易银行都需录入个人外汇业务系统。</td>
+    <td title="1" >通过外币代兑点发生的结汇</td>
+    <td title="1" >通过银行柜台尾零结汇、转利息结汇等小于等值100美元（含100美元）的结汇</td>
+    <td  title="1" >外币卡境内消费结汇</td>
+    <td title="1" >境外卡通过自助银行设备提取人民币现钞</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='16' style='mso-height-source:userset;height:12pt' id='r160'>
+    <td height='14'  style='height:10.5pt;'>以下哪几种个人境内外汇划转可以办理(<span style='mso-spacerun:yes;'>&nbsp;&nbsp; </span>)。</td>
+    <td  style='overflow:hidden;'>本人与其姐姐外汇储蓄账户之间划转。</td>
+    <td  title="1" >本人外汇储蓄账户之间划转。</td>
+    <td  title="1"  style='overflow:hidden;'>本人与其母亲外汇储蓄账户之间划转。</td>
+    <td  title="1" >本人储蓄账户与结算账户之间的划转。</td>
+    <td >2</td>
+    <td class='x86'>BCD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r161'>
+    <td height='46'  style='height:34.5pt;'>个人境内外汇划转业务审核材料有(<span style='mso-spacerun:yes;'>&nbsp; </span>)。</td>
+    <td title="1" >本人外汇储蓄账户之间的划转，凭有效身份证件办理。</td>
+    <td class='x87'>本人与其直系亲属储蓄账户间的资金划转，凭双方有效身份证件办理。</td>
+    <td title="1" >本人与其直系亲属储蓄账户间的资金划转，凭双方有效身份证件和直系亲属关系证明办理。</td>
+    <td title="1" >划转账户分属境内个人和境外个人，其资金境内划转按跨境交易进行管理。</td>
+    <td >2</td>
+    <td >ACD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r162'>
+    <td height='46' style='height:34.5pt;overflow:hidden;'>49.汇入汇款是指银行根据境外银行的资金支付指示，按照国家外汇管理政策的规定，将外汇资金解付给个人的业务。它包括（ ）。</td>
+    <td  title="1" >个人银行汇款</td>
+    <td title="1" >个人票据业务（汇票、本票、支票、旅行支票等）</td>
+    <td title="1" >西联汇款</td>
+    <td title="1" >速汇金汇款</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='80' style='mso-height-source:userset;height:60pt' id='r163'>
+    <td height='78' style='height:58.5pt;'><font class="font20">非经营性收汇业务</font><font class="font19">审核原则及要点错误的（ ）。</font></td>
+    <td  title="1" style='overflow:hidden;'>汇入款的资金性质须是非经常项目项下非经营性外汇。</td>
+    <td style='overflow:hidden;'>汇款指示中有注明的以汇款指示为准，汇款指示中未注明的以收款人申报的为准。</td>
+    <td title="1" >解付银行或结汇中转行应在为客户解付或结汇后3个工作日内通知申报主体按《涉外收入申报单》的填报说明逐笔填写《涉外收入申报单》纸质凭证或电子单据。</td>
+    <td>原则上，每笔个人经常项目项下非经营性外汇的收入，银行经办人员须审核收款人账号、户名是否与银行系统的信息相符。</td>
+    <td >2</td>
+    <td >AC</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r164'>
+    <td height='46' style='height:34.5pt;'><font class="font19">50.</font><font class="font20">非经营性收汇业务</font><font class="font19">审核原则及要点正确的（<span style='mso-spacerun:yes;'>&nbsp; </span>）。</font></td>
+    <td  title="1" style='overflow:hidden;'>境内个人等值5千美元以上的汇入汇款，应在款项解付后5个工作日内完成国际收支申报。</td>
+    <td  title="1" style='overflow:hidden;'>5千美元（含）以下的收汇，可仅申报基础信息。</td>
+    <td  title="1" style='overflow:hidden;'>境内非居民个人汇入款不论金额大小均需国际收支申报</td>
+    <td>对于关注客户，银行不可办理入账。</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr  class="other" height='128' style='mso-height-source:userset;height:96pt' id='r165'>
+    <td height='126' style='height:94.5pt;overflow:hidden;'>银行应采取有效措施核实结售汇交易所涉人民币资金的情况。应按以下要求在系统中进行录入反馈：（ ）</td>
+    <td title="1" >如果人民币资金是现钞形式，则填写“使用人民币现钞金额”；</td>
+    <td  title="1" style='overflow:hidden;'>如果人民币资金来自本人账户，同时该账户近期没有发生非同名账户转入，或者人民币资金由同名账户转入，则填写“来自本人账户人民币金额”；</td>
+    <td  title="1" style='overflow:hidden;'>如果人民币资金来自本人账户，同时该账户近期有非同名账户转入人民币记录（除零星小额的人民币资金划转），则填写人民币转入信息，金额按实际转入金额填写；汇款人的信息（身份证件类型、证件号码、国别、汇款银行、汇款账号、汇款日期等）应尽量填写完整。</td>
+    <td title="1" >以上三种情况同时存在的，三个金额均应填写。</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r166'>
+    <td height='30' style='height:22.5pt;overflow:hidden;'>境内个人当日累计等值5万美元以上的外汇储蓄账户内外汇汇出，凭以下哪些资料（ ）办理</td>
+    <td  title="1" >经常项目下有交易额的真实性凭证</td>
+    <td  title="1" style='overflow:hidden;'>《服务贸易等项目对外支付税务备案表》</td>
+    <td title="1" >本人有效身份证</td>
+    <td >资金来源证明</td>
+    <td >2</td>
+    <td>ABC</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r167'>
+    <td height='30' style='height:22.5pt;overflow:hidden;'>55、境外个人手持外币现钞直接汇出境外,单笔或当日累计等值1万美元以上的, 凭以下哪些资料（ ）办理</td>
+    <td  title="1" >本人的有效身份证件</td>
+    <td  style='overflow:hidden;'>经常项目项下有交易额的真实性凭证</td>
+    <td title="1" >经海关签章的本人《中华人民共和国海关进境旅客行李物品申报单》</td>
+    <td title="1" >本人原存款银行（境内银行）外币现钞提取单据。</td>
+    <td >2</td>
+    <td>ACD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r168'>
+    <td height='46' style='height:34.5pt;'>银行应采取有效措施核实结售汇交易所涉人民币资金的情况。总体原则（以购汇为例）是反馈的（ ）之和应与购汇所用人民币金额大体相当。</td>
+    <td  title="1" >使用人民币现钞金额</td>
+    <td  title="1" >来自本人账户人民币金额</td>
+    <td  title="1" >人民币转入金额</td>
+    <td>来自他人账户人民币金额</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr  class="other" height='16' style='mso-height-source:userset;height:12pt' id='r169'>
+    <td height='14'  style='height:10.5pt;'>银行应按要求向外汇局管理平台报送个人结算账户（ ）信息</td>
+    <td  title="1" >开立</td>
+    <td title="1"  >变更</td>
+    <td  title="1" >销户</td>
+    <td title="1"  >收支余信息</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='16' style='mso-height-source:userset;height:12pt' id='r170'>
+    <td height='14'  style='height:10.5pt;'>个人外汇结算账户不得办理以下哪些（ ）业务</td>
+    <td  title="1" >存入外币现钞</td>
+    <td >结汇</td>
+    <td >售汇</td>
+    <td title="1"  >提取外币现钞</td>
+    <td >2</td>
+    <td >AD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r171'>
+    <td height='46'  style='height:34.5pt;'>开立个人外汇结算账户需要提供以下哪些材料（ ）</td>
+    <td title="1" >工商营业执照或者其他执业证明原件及复印件</td>
+    <td  title="1" style='overflow:hidden;'>法定代表人或经营者本人有效身份证明正本及复印件</td>
+    <td title="1" >具有对外贸易经营权的还需提供加盖备案登记印章的对外贸易经营备案表的正本及复印件</td>
+    <td >税务登记证</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr  class="other"  style='mso-height-source:userset;height:48pt' id='r172'>
+    <td height='62' style='height:46.5pt;'>个人外汇结算账户开户审核原则（ ）</td>
+    <td title="1" >对于本地工商登记的客户，通过工商局企业档案查询系统查询营业执照的方式来进行核实</td>
+    <td>对于异地工商登记的客户，通过工商局企业档案查询系统查询营业执照的方式来进行核实</td>
+    <td>对于异地工商登记的客户，通过电话询问进行核实</td>
+    <td title="1" >对于异地工商登记的客户，网点应通过上门或委托个人工商户注册地或经营地的当地分支机构上门进行核实</td>
+    <td >2</td>
+    <td >AD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r173'>
+    <td height='30' style='height:22.5pt;'>银行不得在以下哪些（ ）情况下为存款人开立个人银行账户和销户业务</td>
+    <td  title="1" >存款人不知情</td>
+    <td  title="1" >无申请人签名</td>
+    <td >无存款人签名</td>
+    <td title="1"  >未提供申请人身份证件</td>
+    <td >2</td>
+    <td >ABD</td>
+</tr>
+<tr class="other"  height='16' style='mso-height-source:userset;height:12pt' id='r174'>
+    <td height='14'  style='height:10.5pt;'>个人对外贸易经营者办理对外贸易（ ）应通过本人的（ ）进行</td>
+    <td >存取外币现钞</td>
+    <td  title="1" >购付汇、收结汇</td>
+    <td >外汇储蓄账户</td>
+    <td  title="1" >外汇结算账户</td>
+    <td >2</td>
+    <td >BD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r175'>
+    <td height='46' style='height:34.5pt;'>对于列入“关注名单”管理的客户，应凭（ ）在银行办理结售汇业务。银行应当按照真实性审核原则，严格审核相关证明材料。</td>
+    <td title="1"  >本人有效身份证件</td>
+    <td  title="1" >有交易额的相关证明等材料</td>
+    <td>代理人有效身份证件</td>
+    <td>无交易额的相关证明等材料</td>
+    <td >2</td>
+    <td >AB</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r176'>
+    <td height='46' style='height:34.5pt;'>各银行应配合外汇局，并且指定专人在外汇局推送相关信息之日起的20天内，在个人外汇业务系统中反馈个人（ ）及外汇局要求的其他信息。</td>
+    <td title="1"  >结汇人民币资金去向</td>
+    <td >结汇人民币资金来源</td>
+    <td >购汇人民币资金去向</td>
+    <td title="1"  >购汇人民币资金来源</td>
+    <td >2</td>
+    <td >AD</td>
+</tr>
+<tr  class="other" height='16' style='mso-height-source:userset;height:12pt' id='r177'>
+    <td height='14'  style='height:10.5pt;'>个体工商户办理结汇，需要提供以下哪些（ ）材料</td>
+    <td title="1"  >合同</td>
+    <td >发票</td>
+    <td >报关单</td>
+    <td title="1"  >物流公司出具的运输单据</td>
+    <td >2</td>
+    <td>AD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r178'>
+    <td height='30'  style='height:22.5pt;'>审核个体工商户经营性外汇业务，应从以下哪些方面（ ）进行分析</td>
+    <td title="1"  >主营业务范围</td>
+    <td  title="1" >业务量</td>
+    <td title="1" >结算方式</td>
+    <td  title="1" >业务往来记录</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r179'>
+    <td height='46'  style='height:34.5pt;'>代理进出口企业必须符合以下哪些条件（ ）</td>
+    <td  title="1" >依法正常经营的企业</td>
+    <td  title="1" >货物贸易名录企业</td>
+    <td>在人民银行、外汇管理局、工商、海关、税务等其他部门有重大违规记录</td>
+    <td >没有进出口权的企业</td>
+    <td >2</td>
+    <td >AB</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r180'>
+    <td height='30' style='height:22.5pt;'>（ ）是指有经营能力并依法办理工商登记或者其他执业手续，取得个人工商营业执照或者其他执业证明，从事经营活动的个人</td>
+    <td title="1"  >个体工商户</td>
+    <td >侨贸客户</td>
+    <td title="1" >个人对外贸易经营者</td>
+    <td >跨境电商客户</td>
+    <td >2</td>
+    <td >AC</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r181'>
+    <td height='46'  style='height:34.5pt;'>境内个人结算账户外汇划转应审核的材料是（ ）</td>
+    <td  title="1" style='overflow:hidden;'>&nbsp;本人外汇结算账户之间划转：本人有效身份证件</td>
+    <td  title="1" style='overflow:hidden;'>本人外汇储蓄账户与结算账户之间划转：本人有效身份证件；</td>
+    <td  title="1" style='overflow:hidden;'>划转给代理企业：与代理企业签订的进口代理合同或协议。</td>
+    <td>本人外汇储蓄账户与结算账户之间可以随意划转，不需审核本人身份证件。</td>
+    <td >2</td>
+    <td >ABC</td>
+</tr>
+<tr  class="other"  style='mso-height-source:userset;height:48pt' id='r182'>
+    <td height='62'  style='height:46.5pt;'>境内个人结算账户外汇划转应注意哪些风险（<span style='mso-spacerun:yes;'>&nbsp; </span>）</td>
+    <td  title="1" >关注个体工商户是否有进出口贸易权，否则必须是通过代理企业进行对外结算，另有规定除外。</td>
+    <td >划转给代理企业的业务不需要真实的贸易背景。</td>
+    <td  title="1" >对于客户及大额、高频等异常或可疑交易项下划款，银行应尽职做好调查，调查付款的合理性和必要性。</td>
+    <td  title="1" >划转给代理企业的业务应该具有真实的贸易背景。</td>
+    <td >2</td>
+    <td >ACD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r183'>
+    <td height='30' style='height:22.5pt;'>“股权激励计划”审核材料包括哪些（<span style='mso-spacerun:yes;'>&nbsp; </span>）</td>
+    <td  title="1" >本人有效身份证件</td>
+    <td title="1"  >股权激励计划外汇登记证明复印件</td>
+    <td  title="1" >个人与境内公司雇佣及劳务关系说明</td>
+    <td  title="1" >针对前述材料需要提供的补充材料</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='80' style='mso-height-source:userset;height:60pt' id='r184'>
+    <td height='78'  style='height:58.5pt;'>关于个人参与股权激励计划资金来源及划转说法正确的是（<span style='mso-spacerun:yes;'>&nbsp; </span>）</td>
+    <td >以人民币资金参与的，个人直接由本人账户办理购付汇手续。</td>
+    <td title="1"  >应是个人外汇储蓄账户中自有外汇或人民币等境内合法资金参与股权激励计划</td>
+    <td  title="1" >以人民币资金参与的，个人应将人民币资金划转至境内代理机构的账户，由境内代理机构办理有关购付汇手续。</td>
+    <td  title="1" >以自有外汇资金参与的，银行应凭加盖了境内代理机构公章的股权激励计划外汇登记证明复印件、个人与境内公司雇佣及劳务关系说明等材料办理相应的资金划转手续。</td>
+    <td >2</td>
+    <td >BCD</td>
+</tr>
+<tr  class="other" height='144' style='mso-height-source:userset;height:108pt' id='r185'>
+    <td height='142' style='height:106.5pt;'>以下关于个人参与股权激励计划所得外汇收入调回、划转及结汇说法错误的是（ ）</td>
+    <td style='overflow:hidden;'>根据参与股权激励计划的个人自身意愿，所有调回资金均可保留现汇。银行凭境内代理机构的相关书面申请、股权激励计划外汇登记证明、境外交易凭证等材料，将资金从境内代理机构境内专用外汇账户分别划入对应的个人外汇储蓄账户，并按照个人外汇储蓄账户的有关规定管理和使用。</td>
+    <td >境内个人以其外汇储蓄账户中自有外汇汇出境外的本金对应部分必须按照上述路径划回其个人外汇储蓄账户，不得由境内代理机构代为结汇。</td>
+    <td  title="1" >境内个人以其外汇储蓄账户中自有外汇汇出境外的本金对应部分必须按照上述路径划回境内代理机构，由境内代理机构代为结汇。</td>
+    <td title="1"  >不得根据参与股权激励计划的个人自身意愿，所有调回资金不得保留现汇，必须直接结汇。银行凭境内代理机构的相关书面申请、股权激励计划外汇登记证明、境外交易凭证等材料，将资金从境内代理机构境内专用外汇账户结汇后分别划入对应的个人外汇储蓄账户。</td>
+    <td >2</td>
+    <td >CD</td>
+</tr>
+<tr  class="other" height='80' style='mso-height-source:userset;height:60pt' id='r186'>
+    <td height='78'  style='height:58.5pt;'>境外个人购买境内商品房结汇业务审核的资料包括哪些（ ）</td>
+    <td title="1" >本人的有效身份证件</td>
+    <td  title="1" >商品房销售合同或预售合同</td>
+    <td title="1" >房地产主管部门出具的该非居民在所在城市购房的商品房预售合同登记备案表等相关证明（购买现房及二手房的，应提供房地产主管部门出具的相关产权登记证明文件）</td>
+    <td title="1" >&nbsp;如委托他人办理，应提供经公证的授权书及受托人的有效身份证明</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='80' style='mso-height-source:userset;height:60pt' id='r187'>
+    <td height='78'  style='height:58.5pt;'>境外个人购买境内商品房结汇业务审核原则及要点（ ）</td>
+    <td title="1"  style='overflow:hidden;'>银行应将购买境内商品房的外汇资金结汇后直接划入房地产开发企业的人民币账户或是二手房转让方的人民币账户，不得为其办理境内原币划转。</td>
+    <td>夫妻双方共同购买境内商品房的，其中一方为境内个人，另一方境外个人，按照境内个人办理。 </td>
+    <td>银行应将购买境内商品房的外汇资金结汇后直接划入境外个人人民币账户。</td>
+    <td title="1" >夫妻双方共同购买境内商品房的，其中一方为境内个人，另一方境外个人，按照境外个人办理。</td>
+    <td >2</td>
+    <td >AD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r188'>
+    <td height='30'  style='height:22.5pt;overflow:hidden;'>境外个人将因未购得退回的人民币购房款购汇汇出业务审核材料包括（ ）</td>
+    <td title="1" >本人的有效身份证件</td>
+    <td title="1" >原结汇凭证</td>
+    <td title="1"  style='overflow:hidden;'>与房地产开发企业或二手房出让方解除商品房买卖合同的证明文件</td>
+    <td title="1" >房地产主管部门出具的取消购买商品房的证明</td>
+    <td >2</td>
+    <td>ABCD</td>
+</tr>
+<tr  class="other" height='112' style='mso-height-source:userset;height:84pt' id='r189'>
+    <td height='110'  style='height:82.5pt;overflow:hidden;'>境外个人将因未购得退回的人民币购房款购汇汇出业务审核原则及要点（ ）</td>
+    <td title="1" >结汇后退回的，人民币购汇后应原路退回个人外汇账户或划回境内外汇账户（只适用于原购房款为从境内外汇账户结汇支付的情况），如退回的人民币低于原结汇金额的应提交证明确实合规使用的相关材料。</td>
+    <td title="1"  style='overflow:hidden;'>银行应在办理业务后及时完成国际收支申报。</td>
+    <td style='overflow:hidden;'>&nbsp;购房款境内留存期间产生的合理利息不得汇出。</td>
+    <td title="1" >允许购房款境内留存期间产生的合理利息一并汇出。</td>
+    <td >2</td>
+    <td >ABD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r190'>
+    <td height='30'  style='height:22.5pt;'>境外个人将因未购得退回的人民币购房款购汇汇出业务应注意哪些风险（ ）</td>
+    <td title="1"  >客户身份不明或对客户身份有疑问的；</td>
+    <td  title="1" >以往获取的客户身份信息真实性有误或出现重大变更的;</td>
+    <td  title="1" >提供的业务资料应当符合国家有关法规规定,必须真实有效。</td>
+    <td  title="1" >对于关注客户，银行原则上应拒绝办理代理业务.</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr   class="other" style='mso-height-source:userset;height:48pt' id='r191'>
+    <td height='62'  style='height:46.5pt;'>境外个人转让境内商品房所得资金购付汇业务审核材料包括（ ）</td>
+    <td  title="1" >本人的有效身份证件</td>
+    <td  title="1" >商品房转让合同及登记证明文件</td>
+    <td  title="1" >《服务贸易等项目对外支付税务备案表》（金额在等值5万美元及以下的无需提交）或其他税务证明材料；</td>
+    <td  title="1" >如委托他人办理，应提供经公证的授权书及受托人的有效身份证明</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='128' style='mso-height-source:userset;height:96pt' id='r192'>
+    <td height='126'  style='height:94.5pt;overflow:hidden;'>境外个人转让境内商品房所得资金购付汇业务审核原则及要点（ ）</td>
+    <td  title="1" >汇出金额不得超出商品房转让金额扣减本次转让所包括的税费后的余额。</td>
+    <td  title="1" >银行应审核税务证明中记载金额与申请汇出金额是否一致，申请汇出金额超出税务证明记载金额的不得办理。</td>
+    <td  title="1" >银行应在业务办理后及时完成国际收支申报</td>
+    <td  title="1" >银行在办理完业务后，应在税务主管部门出具的《服务贸易等项目对外支付税务备案表》（金额在5万美元及以下的无需提交）或其他完税证明原件上签注业务种类、金额、日期并加盖银行业务章，留存有签注字样并加盖业务专用章的复印件。</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r193'>
+    <td height='46'  style='height:34.5pt;'>《服务贸易等项目对外支付税务备案表》审核要点（ ）</td>
+    <td title="1" >备案信息应与申请支付项目一致。</td>
+    <td style='overflow:hidden;'>《服务贸易等项目对外支付税务备案表》付汇金额应小于或等于实际支付金额。</td>
+    <td  title="1" >《服务贸易等项目对外支付税务备案表》付汇金额应大于或等于实际支付金额。</td>
+    <td  title="1" >《服务贸易等项目对外支付税务备案表》应加盖主管国税机关印章。</td>
+    <td >2</td>
+    <td >ACD</td>
+</tr>
+<tr   class="other" style='mso-height-source:userset;height:48pt' id='r194'>
+    <td height='62'  style='height:46.5pt;'>特殊目的公司项下个人购付汇业务审核材料包括（ ）</td>
+    <td  title="1" >本人的有效身份证件</td>
+    <td >《服务贸易等项目对外支付税务备案表》（金额在等值5万美元及以下的无需提交）或其他税务证明材料</td>
+    <td  title="1" >外汇局资本项目信息系统打印的核准件</td>
+    <td  title="1" >针对前述材料需要提供的补充材料</td>
+    <td >2</td>
+    <td >ACD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r195'>
+    <td height='30'  style='height:22.5pt;'>特殊目的公司项下个人购付汇业务审核原则（ ）</td>
+    <td style='overflow:hidden;'>银行可以先办理后审核外汇局相应核准件要求</td>
+    <td  title="1" >银行应严格按照外汇局相应核准件要求办理</td>
+    <td  title="1" >银行应在业务办理后及时完成国际收支申报</td>
+    <td >特殊目的公司项下个人购付汇业务无需国际收支申报</td>
+    <td >2</td>
+    <td >BC</td>
+</tr>
+<tr   class="other" style='mso-height-source:userset;height:48pt' id='r196'>
+    <td height='62' style='height:46.5pt;overflow:hidden;'>“股权激励计划”是指境外上市公司以本公司股票为标的，对境内公司的（ ）等与公司具有雇佣或劳务关系的个人进行权益激励的计划，包括员工持股计划、股票期权计划等法律、法规允许的股权激励方式。</td>
+    <td title="1" >董事</td>
+    <td title="1" >监事</td>
+    <td title="1" >高级管理人员</td>
+    <td title="1" >其他员工</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other"  style='mso-height-source:userset;height:48pt' id='r197'>
+    <td>境内个人结算账户外汇划转业务审核原则及要点（ ）</td>
+    <td  title="1" style='overflow:hidden;'>本人外汇结算账户之间划转：可以直接划转，不受限制</td>
+    <td title="1"  style='overflow:hidden;'>&nbsp;本人外汇储蓄账户与结算账户之间划转：储蓄账户向结算账户划转，仅限于划转当日对外支付，不得划转后结汇</td>
+    <td  title="1" >跨行划转，划出行应标注资金来源的账户性质</td>
+    <td  title="1" >对外付汇：个体工商户必须通过本人外汇结算账户划转给代理企业的经常项目外汇账户后汇出境外</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r198'>
+    <td height='30'  style='height:22.5pt;'>移民财产转移购付汇业务需要审核那些材料(<span style='mso-spacerun:yes;'>&nbsp; </span>)</td>
+    <td  title="1" >本人的有效身份证件；</td>
+    <td  title="1"  style='overflow:hidden;'>移民原户籍所在地外汇局的核准件；</td>
+    <td title="1" >如委托他人办理，应提供委托代理协议及受托人的有效身份证明；</td>
+    <td title="1"  >针对前述材料需要提供的补充材料。</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other"  style='mso-height-source:userset;height:48pt' id='r199'>
+    <td height='62' style='height:46.5pt;'>继承财产转移购付汇业务需要审核那些材料(<span style='mso-spacerun:yes;'>&nbsp; </span>)</td>
+    <td title="1" >本人有效身份证件；</td>
+    <td>被继承人生前户籍所在地外汇局的核准件，当继承人从不同被继承人处继承财产，提交所有被继承人生前户籍所在地外汇局的核准件；</td>
+    <td title="1" >如委托他人办理，应提供委托代理协议及受托人的有效身份证明；</td>
+    <td title="1"  >针对前述材料需要提供的补充材料。</td>
+    <td >2</td>
+    <td >ACD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r200'>
+    <td height='30' style='height:22.5pt;'>个人电子银行业务是指银行通过（ ）等电子渠道向个人客户提供外汇业务服务的方式。</td>
+    <td  title="1" >网络银行</td>
+    <td  title="1" >手机银行</td>
+    <td  title="1" >电话银行</td>
+    <td  title="1" >自助终端</td>
+    <td >2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='112' style='mso-height-source:userset;height:84pt' id='r201'>
+    <td height='110' style='height:82.5pt;'>个人通过电子渠道办理外汇业务的，银行应按哪些要求履行业务准入风险防控。（ ）</td>
+    <td title="1"  style='overflow:hidden;'>客户前往柜面开通网上银行等电子渠道时必须进行身份联网核查。</td>
+    <td title="1" >一个客户在同一银行仅能开通一个网上银行，已开通网上银行的客户持其名下其他账户开通网上银行，该账户将自动下挂至客户已有网上银行中。</td>
+    <td title="1" >网上银行开通后如客户需要向外进行转账、支付等资金类交易，须另行领用身份认证工具。身份认证工具的领用须由客户持本人有效实名身份证件前往银行网点柜面办理或登录电子银行各渠道申请领用。</td>
+    <td title="1" >银行应通过电子渠道对客户办理个人外汇业务当遵守适用的法律法规、规章及监管制度进行风险提示。对于个人出借本人额度协助他人规避额度及真实性管理、通过借用他人额度或其他任何方式规避额度及真实性管理等行为进行警示。</td>
+    <td>2</td>
+    <td >ABCD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r202'>
+    <td height='46' style='height:34.5pt;overflow:hidden;'>支付机构跨境外汇支付业务是指支付机构通过银行为电子商务（货物贸易或服务贸易）交易双方提供跨境互联网支付所涉的（ ）服务。</td>
+    <td  title="1" >外汇资金集中收付</td>
+    <td >外币现钞存取</td>
+    <td title="1" >相关结售汇服务</td>
+    <td>境内外币资金划转</td>
+    <td >2</td>
+    <td >AC</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r203'>
+    <td height='46' style='height:34.5pt;overflow:hidden;'>境内银行应在支付机构实际对外收付款之日后的第（ ）个工作日中午12：00前，完成还原数据基础信息的报送工作；第（ ）个工作日中午12：00前，完成还原数据申报信息的报送工作。</td>
+    <td  title="1" >1</td>
+    <td >2</td>
+    <td >3</td>
+    <td  title="1" >5</td>
+    <td >2</td>
+    <td >AD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r204'>
+    <td height='46' style='height:34.5pt;overflow:hidden;'>银行应根据支付机构的数据，在办理结售汇之日（T）后的第(<span style='mso-spacerun:yes;'>&nbsp; </span>)个工作日内对于单笔金额等值(<span style='mso-spacerun:yes;'>&nbsp; </span>)美元以下的区分币种和交易性质汇总后以支付机构名义逐笔录入“个人外汇业务系统”。</td>
+    <td >1</td>
+    <td  title="1" >5</td>
+    <td >500（不含）</td>
+    <td title="1"  >500（含）</td>
+    <td >2</td>
+    <td >BD</td>
+</tr>
+<tr  class="other" height='96' style='mso-height-source:userset;height:72pt' id='r205'>
+    <td height='94' style='height:70.5pt;'>分拆交易行为特征包括以下哪些（ ）:</td>
+    <td title="1" >境外同一个人或机构同日、隔日或连续多日将外汇汇给境内5个以上（含，下同）不同个人，收款人分别结汇。</td>
+    <td title="1" >5个以上不同个人同日、隔日或连续多日分别购汇后，将外汇汇给境外同一个人或机构。</td>
+    <td  title="1" style='overflow:hidden;'>5个以上不同个人同日、隔日或连续多日分别结汇后，将人民币资金存入或汇入同一个人或机构的人民币账户。</td>
+    <td title="1" >同一个人将其外汇储蓄账户内存款划转至5个以上直系亲属，直系亲属分别在年度总额内结汇；或者同一个人的5个以上直系亲属分别在年度总额内购汇后，将所购外汇划转至该个人外汇储蓄账户。</td>
+    <td >2</td>
+    <td>ABCD</td>
+</tr>
+<tr  class="other" height='48' style='mso-height-source:userset;height:36pt' id='r206'>
+    <td height='46' style='height:34.5pt;overflow:hidden;'>境内个人超过年度总额非经营性购汇业务,有交易额的证明材料原则上应为原件，对不能留存纸质原件的，银行应在相关交易材料原件上签注（ ）并加盖业务印章或业务戳记后，复印留存。</td>
+    <td title="1" >金额</td>
+    <td >经办人</td>
+    <td  title="1" >日期</td>
+    <td  title="1" >经办网点</td>
+    <td >2</td>
+    <td >ACD</td>
+</tr>
+<tr  class="other" height='32' style='mso-height-source:userset;height:24pt' id='r207'>
+    <td height='30' style='height:22.5pt;'>银行在办理占用额度结售汇业务时，如遇系统提示打印（ ）或（ ）的，银行应打印后请告知客户。</td>
+    <td title="1" >《个人外汇业务风险提示函》</td>
+    <td>《个人外汇购汇申请书》</td>
+    <td title="1"   style='overflow:hidden;'>《个人外汇业务“关注名单”告知书》</td>
+    <td>《个人外汇业务“关注名单”承诺书》</td>
+    <td >2</td>
+    <td >AC</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r208'>
+    <td height='46'  style='height:34.5pt;'>原则上居住在中国境内16岁以下的中国公民应由监护人代理办理外汇业务，审核监护人有效身份证件以及账户持有人的居民身份证或户口簿。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='16' class='x90' style='mso-height-source:userset;height:12pt' id='r209'>
+    <td height='14'  style='height:10.5pt;'>居住在境内或境外的中国籍华侨，审核本人中国护照。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r210'>
+    <td height='30'  style='height:22.5pt;'>定居国外的中国公民可提供公安机关出具的户籍证明做为辅助身份证明材料。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r211'>
+    <td height='30'  style='height:22.5pt;'>个人在7日内从同一外汇储蓄账户5次以上提取接近等值1万美元外币现钞可认定为分拆提钞。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r212'>
+    <td height='30'  style='height:22.5pt;'>境外个人可以凭大使馆出具的相关证明文件做为直系亲属关系证明。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r213'>
+    <td height='30'  style='height:22.5pt;'>《服务贸易等项目对外支付税务备案表》中本次付汇金额可小于或等于实际支付金额。</td>
+    <td >对</td>
+    <td title="1"  >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r214'>
+    <td height='30'  style='height:22.5pt;'>《提取外币现钞备案表》：单笔提取等值1万美元以上外币现钞的，由海关核准并出具。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='16' class='x90' style='mso-height-source:userset;height:12pt' id='r215'>
+    <td height='14'  style='height:10.5pt;'>对于可信客户，额度内的业务也应加强真实性审核。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r216'>
+    <td height='30'  style='height:22.5pt;'>客户办理外币存取款、汇出汇款业务时，应查询当日是否已超过现行外汇管理规定的限额。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r217'>
+    <td height='46'  style='height:34.5pt;'>现钞业务中客户提交的申报单，必须是经海关签章的本人《中华人民共和国海关进境旅客行李物品申报单》，银行提钞凭证应为境内银行出具的本人提钞凭证。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r218'>
+    <td height='46'  style='height:34.5pt;'>银行办理外汇业务或后续监测中发现客户存在涉嫌违反外汇管理法规、规避监管行为的，应当及时向所在地人民银行报告可疑情况。</td>
+    <td >对</td>
+    <td title="1"  >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r219'>
+    <td height='30'  style='height:22.5pt;'>个人外汇储蓄账户的收支范围为非经营性外汇收付、本人外汇储蓄账户间的资金划转。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r220'>
+    <td height='46'  style='height:34.5pt;'>个人开立银行账户原则上由本人亲自办理，如确有需的，可委托他人办理。委托他人办理的，应出具代理人、被代理人的有效实名制身份证件以及被代理人的书面授权委托。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr  class='x90' style='mso-height-source:userset;height:48pt' id='r221'>
+    <td height='62'  style='height:46.5pt;'>外币现钞存入当日累计等值5千美元以上的，审核本人的有效证件、经海关签章的《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行外币现钞提取单据。外交人员凭外交人员证件办理，金额不受限制。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r222'>
+    <td height='30'  style='height:22.5pt;'>外币现钞提取当日累计等值1万美元的，须审核本人有效证件、经办银行所在地外汇局签章的《提取外币现钞备案表》。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='16' class='x90' style='mso-height-source:userset;height:12pt' id='r223'>
+    <td height='14'  style='height:10.5pt;'>个人外汇结算账户可以提取外币现钞。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r224'>
+    <td height='30'  style='height:22.5pt;'>个人携带超过等值1万美元以上的外币现钞出境，需向银行申领《携带外汇出境许可证》，海关凭《携带证》验放。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r225'>
+    <td height='30'  style='height:22.5pt;'>对个人结汇和境内个人购汇实行年度总额管理，年度总额分别为每人每年等值5万美元。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r226'>
+    <td height='30'  style='height:22.5pt;'>代办年度总额内个人结售汇业务，只能由直系亲属（仅限于父母、配偶、兄弟姐妹、子女）代为办理。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r227'>
+    <td height='30'  style='height:22.5pt;'>境外个人办理购汇业务的，应提示并引导客户准确、规范填写《个人购汇申请书》，以实现购汇用途与真实用汇意图一致。</td>
+    <td >对</td>
+    <td title="1"  >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r228'>
+    <td height='30'  style='height:22.5pt;'>境内个人超过年度总额的职工报酬收入结汇需审核雇佣合同和收入证明。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='16' class='x90' style='mso-height-source:userset;height:12pt' id='r229'>
+    <td height='14'  style='height:10.5pt;'>境内个人不得购买境外的人寿险、投资返还分红类保险。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r230'>
+    <td height='46'  style='height:34.5pt;'>境外个人超过年度总额的非经营性结汇业务，提供的有交易额的证明材料原则上应为原件，无法提供原件的，可提供传真件或网上下载件办理（须有客户签字）。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r231'>
+    <td height='30'  style='height:22.5pt;'>境外个人结汇单笔等值5万美元以上的，应将结汇所得人民币资金直接划转至交易对方的境内人民币账户。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr  class='x90' style='mso-height-source:userset;height:48pt' id='r232'>
+    <td height='62'  style='height:46.5pt;'>本年度未超过年度结汇总额的个人手持外币现钞结汇，当日累计金额超过等值3千美元的, 凭本人的有效身份证件、经海关签章的本人《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行外币现钞提取单据办理。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r233'>
+    <td height='30'  style='height:22.5pt;'>境内个人超过年度总额的境外邮购购汇需审核广告或定单等收费凭证。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r234'>
+    <td height='30'  style='height:22.5pt;'>超过年度总额的境外直系亲属救助购汇，只能因直系亲属在境外发生疾病、死亡和意外灾难等情况才能办理。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r235'>
+    <td height='30'  style='height:22.5pt;'>境内个人购买保险必须符合国家规定,可以到境外购买人寿保险和投资返还分红类的保险产品。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r236'>
+    <td height='46'  style='height:34.5pt;'>银行办理不占额度的结汇售汇对不能留存纸质证明材料原件的，应在相关交易材料原件上签注（金额、日期和经办网点）并加盖业务印章或业务戳记后，复印留存。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r237'>
+    <td height='30'  style='height:22.5pt;'>个人所购外汇，可以汇出境外、存入本人或他人外汇储蓄账户、或按规定携带出境。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r238'>
+    <td height='46'  style='height:34.5pt;'>境内个人境外留学、旅游、探亲等因私用汇无须办理和提交《税务备案表》；其他情况如单笔支付等值5万美元以上（不含等值5万美元）的，应当审核税务备案表。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r239'>
+    <td height='30'  style='height:22.5pt;'>个人经常项目项下非经营性购汇，购汇资金来源应限于人民币现钞、本人或其直系亲属的人民币账户和银行卡内资金。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r240'>
+    <td height='30'  style='height:22.5pt;'>境外个人职工报酬购汇需审核的材料：雇佣或劳务合同或就业证明、用人单位出具的收入清单。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r241'>
+    <td height='46'  style='height:34.5pt;'>单笔或当日累计兑换不超过等值1000美元（含）以及离境前在境内关外场所当日累计不超过等值500美元（含）的兑换，可凭本人有效身份证件办理。</td>
+    <td >对</td>
+    <td title="1"  >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r242'>
+    <td height='30'  style='height:22.5pt;'>境外个人未用完人民币兑回外汇，“个人外汇业务系统”资金属性应选择“职工报酬及赡家款”。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='16' class='x90' style='mso-height-source:userset;height:12pt' id='r243'>
+    <td height='14'  style='height:10.5pt;'>境内卡境外使用购汇还款，可不录入个人外汇业务系统。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r244'>
+    <td height='30'  style='height:22.5pt;'>本人与其直系亲属储蓄账户间的资金划转，主体应同为境内个人或同为境外个人，金额不受限制。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r245'>
+    <td height='30'  style='height:22.5pt;'>本人外汇储蓄账户向外汇结算账户的划款限于划款当日的对外支付，不得划转后结汇。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r246'>
+    <td height='30'  style='height:22.5pt;'>汇入款的资金性质汇款指示中有注明的以汇款指示为准，汇款指示中未注明的以收款人申报的为准。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r247'>
+    <td height='46'  style='height:34.5pt;'>汇入款解付银行或结汇中转行应在为客户解付或结汇后3个工作日内通知申报主体按《涉外收入申报单》的填报说明逐笔填写《涉外收入申报单》纸质凭证或电子单据。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r248'>
+    <td height='30'  style='height:22.5pt;'>个人经常项目项下非经营性外汇的收入应解付至个人外汇储蓄账户。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r249'>
+    <td height='46'  style='height:34.5pt;'>境内个人当日累计等值5万美元以下（含）的外汇储蓄账户内外汇汇出，凭本人有效身份证办理，对于资金性质不明确的业务，银行应要求境内个人提供交易单证进行合理审查。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r250'>
+    <td height='30'  style='height:22.5pt;'>单笔等值5万美元以内、接近等值5万美元且支出频率较高的付汇业务，可要求交易主体提交其他证明材料。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='80' class='x90' style='mso-height-source:userset;height:60pt' id='r251'>
+    <td height='78'  style='height:58.5pt;'>境外个人手持外币现钞直接汇出境外,单笔或当日累计超过等值1万美元的, 应审核本人的有效身份证件、经海关签章的本人《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行（境内银行）外币现钞提取单据，以及经常项目项下有交易额的真实性凭证。</td>
+    <td >对</td>
+    <td title="1"  >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r252'>
+    <td height='30'  style='height:22.5pt;'>开立外汇结算账户的个人需要进行工商登记或者办理其他执业手续，包括个人对外贸易经营者与个体工商户。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='16' class='x90' style='mso-height-source:userset;height:12pt' id='r253'>
+    <td height='14'  style='height:10.5pt;'>个人外汇结算账户可以存入和提取外币现钞。</td>
+    <td >对</td>
+    <td title="1"  >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r254'>
+    <td height='30'  style='height:22.5pt;'>个人对外贸易经营者办理对外贸易购付汇、收结汇应通过本人的外汇储蓄账户进行。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r255'>
+    <td height='30'  style='height:22.5pt;'>个体工商户个人外汇结算账户结汇凭代理出合同及物流公司出具的运输单据等商业单证办理。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r256'>
+    <td height='30'  style='height:22.5pt;'>本人外汇储蓄账户与结算账户之间划转：储蓄账户向结算账户划转，仅限于划转当日对外支付，不得划转后结汇。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r257'>
+    <td height='30'  style='height:22.5pt;'>个人参与股权激励计划资金来源应是个人外汇储蓄账户中自有外汇或人民币等境内合法资金。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r258'>
+    <td height='30'  style='height:22.5pt;'>境外个人购买境内商品房结汇应审核银行应将购买境内商品房的外汇资金结汇后直接划入该境外个人账户。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r259'>
+    <td height='46'  style='height:34.5pt;'>境外个人将因未购得退回的人民币购房款购汇汇出应审核房地产主管部门出具的该非居民在所在城市购房的商品房预售合同登记备案表等相关证明。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r260'>
+    <td height='46'  style='height:34.5pt;'>境外个人转让境内商品房所得资金购付汇，银行应审核税务证明中记载金额与申请汇出金额是否一致，申请汇出金额超出税务证明记载金额的不得办理。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r261'>
+    <td height='30'  style='height:22.5pt;'>特殊目的公司项下个人购付汇业务应审核本人的有效身份证件和外汇局资本项目信息系统打印的核准件。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r262'>
+    <td height='30'  style='height:22.5pt;'>移民财产转移购付汇业务，客户需先取得移民原户籍所在地外汇局的核准件。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r263'>
+    <td height='46'  style='height:34.5pt;'>继承财产转移购付汇业务，被继承人生前户籍所在地外汇局的核准件，当继承人从不同被继承人处继承财产，提交所有被继承人生前户籍所在地外汇局的核准件。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r264'>
+    <td height='46'  style='height:34.5pt;'>开通网上银行仅限客户本人持有效实名身份证件和银行有效账户，并前往网点柜面或登录银行门户网站新用户注册开通网上银行，他人不可代为办理。</td>
+    <td title="1"  >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='16' class='x90' style='mso-height-source:userset;height:12pt' id='r265'>
+    <td height='14'  style='height:10.5pt;'>一个客户在同一银行可开通多个网上银行。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r266'>
+    <td height='46'  style='height:34.5pt;'>支付机构跨境外汇支付业务，银行应按现行涉外收支数据申报的规定，只对集中收付款或轧差净额结算时支付机构的实际收付款数据进行国际收支统计申报。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r267'>
+    <td height='30'  style='height:22.5pt;'>对于实际收付款数据申报，银行应将实际收付款信息交易编码记为“999999”，申报主体为还原后的原始交易主体。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r268'>
+    <td height='46'  style='height:34.5pt;'>具有以下交易特征的行为认定为分拆结汇：境外同一个人或机构同日、隔日或连续多日将外汇汇给境内5个以上（不含）不同个人，收款人分别结汇。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr  class='x90' style='mso-height-source:userset;height:48pt' id='r269'>
+    <td height='62'  style='height:46.5pt;'>银行工作人员发现上述行为特征之一的，应按照以下规定处理：对于个人分拆特征明显、银行能够确认为分拆行为的，要求个人提交有交易额的相关证明材料后办理，个人无法提供的，银行应不予办理。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='32' class='x90' style='mso-height-source:userset;height:24pt' id='r270'>
+    <td height='30'  style='height:22.5pt;'>对于列入“关注名单”管理的客户，应凭本人有效身份证件和有交易额的相关证明等材料在银行办理结售汇业务。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r271'>
+    <td height='46'  style='height:34.5pt;'>各银行应配合外汇局，并且指定专人在外汇局推送相关信息之日起的10天内，在个人外汇业务系统中反馈个人结汇人民币资金去向、购汇人民币资金来源及外汇局要求的其他信息。</td>
+    <td >对</td>
+    <td  title="1" >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >错</td>
+</tr>
+<tr height='48' class='x90' style='mso-height-source:userset;height:36pt' id='r272'>
+    <td height='46'  style='height:34.5pt;'>购汇业务分拆信息反馈总体原则是反馈的“使用人民币现钞金额”、“来自本人账户人民币金额”、“人民币转入金额”三项之和应与购汇所用人民币金额大体相当。</td>
+    <td  title="1" >对</td>
+    <td >错</td>
+    <td ></td>
+    <td ></td>
+    <td >3</td>
+    <td >对</td>
+</tr>
+<tr  style='mso-height-source:userset;height:48pt' id='r273'>
+    <td height='62'  style='height:46.5pt;'>客户李某于2018年3月13日至3月20日仅凭本人身份证件在A银行从本人同一储蓄账户提取了6笔1万美元的外币现钞。客户李某是否涉嫌分拆结售汇？客户的行为符合哪一条分拆交易行为特征？</td>
+    <td >客户李某不涉嫌分拆结售汇</td>
+    <td >客户涉嫌分拆结售汇。个人在7日内从同一外汇储蓄账户5次以上（含）提取等值5000美元以上外币现钞。</td>
+    <td >客户涉嫌分拆结售汇。个人在7日内从同一外汇储蓄账户3次以上（含）提取接近等值1万美元外币现钞。</td>
+    <td  title="1" >客户涉嫌分拆结售汇。个人在7日内从同一外汇储蓄账户5次以上（含）提取接近等值1万美元外币现钞。</td>
+    <td >4</td>
+    <td >D</td>
+</tr>
+<tr height='96' style='mso-height-source:userset;height:72pt' id='r274'>
+    <td height='94'  style='height:70.5pt;'>客户李某于2018年3月13日至3月20日仅凭本人身份证件在A银行从本人同一储蓄账户提取了6笔1万美元的外币现钞。<br>A银行是否违规？A银行正确做法是什么？</td>
+    <td >A银行不存在违规行为</td>
+    <td  title="1" >A银行违规。A银行在客户李某办理第5笔提钞业务时应要求客户提交有交易额的相关证明材料，客户无法提供的，银行应不予办理。</td>
+    <td >A银行违规。A银行在客户李某办理第4笔提钞业务时应要求客户提交有交易额的相关证明材料，客户无法提供的，银行应不予办理。</td>
+    <td  title="1" style='overflow:hidden;'>A银行违规。A银行在事后核查中发现个人涉嫌分拆结售汇的，应收集相关线索，避免同一个人再次办理分拆业务，同时于发现之日起3个工作日内向当地外汇局进行报告。</td>
+    <td>4</td>
+    <td >BD</td>
+</tr>
+<tr height='96' style='mso-height-source:userset;height:72pt' id='r275'>
+    <td height='94' style='height:70.5pt;overflow:hidden;'>柜面为客户张某办理外币现金销户支取1笔，金额6480美元，随后由张某代为办理其哥哥的现金开户存款业务，金额6480美元，该业务取得双方的身份证原件以及张某哥哥的授权书。该笔美元现金开户业务办理是否正确？</td>
+    <td >正确</td>
+    <td >不正确。个人现金开户业务不能代办。</td>
+    <td title="1"  >不正确。当日办理外币现钞存款累计超过5000美元的，凭本人有效身份证件、经海关签章的《中华人民共和国海关进境旅客行李物品申报单》或本人原存款银行外币现钞提取单据在银行办理。</td>
+    <td title="1"  >不正确。当日办理外币现钞存款累计超过5000美元的，根据外汇管理局要求，必须取得本人（张某哥哥）的原外币现钞提取单据，该案例中无法提供。</td>
+    <td >4</td>
+    <td >CD</td>
+</tr>
+<tr height='80' style='mso-height-source:userset;height:60pt' id='r276'>
+    <td height='78' style='height:58.5pt;overflow:hidden;'>境内个人陶女士因在境外就医，需要支付相关费用20万美元。2017年11月，客户陈先生在A银行柜面，代理妻子陶女士办理境外就医项下的购、付汇业务，业务提供双方有效身份证件、境外就医相关证明材料和委托书等。该笔业务是否可以办理？</td>
+    <td  title="1" >可以办理。境内个人经常项目项下非经营性购汇超过年度总额的，凭本人有效身份证件和有交易额的相关证明材料在银行办理。</td>
+    <td  title="1" >可以办理。境外就医项下的相关证明材料包括但不限于：本人因私护照及有效签证（或签注）、境内医院出具的证明附医生意见以及境外医院出具的费用证明。</td>
+    <td  title="1" >可以办理。个人委托他人办理超过年度总额的购汇、结汇，应分别提供委托人和受托人的有效身份证件、委托人的授权书和相关证明材料。</td>
+    <td >可以办理。个人委托他人办理超过年度总额的购汇、结汇，应提供直系亲属关系证明。</td>
+    <td >4</td>
+    <td >ABC</td>
+</tr>
+<tr height='80' style='mso-height-source:userset;height:60pt' id='r277'>
+    <td height='78' style='height:58.5pt;overflow:hidden;'>香港居民陈先生到银行办理结汇业务，结汇金额为6万美元，用于支付在境内长期租用的一套高档住宅的房租款，陈先生向银行提交了和房东私下签订的房屋租赁合同，银行根据合同为陈先生办理了结汇业务并将人民币资金存入陈先生本人的储蓄账户。请问在以上业务办理过程中，存在哪些错误之处？</td>
+    <td >个人结汇实行年度总额管理。年度总额是每人每年等值5万美元。案例中陈先生为超额结汇。</td>
+    <td  title="1" >陈先生应向银行提交经房屋管理部门登记的房屋租赁合同。</td>
+    <td title="1"  >陈先生还应向银行提交发票或支付通知。</td>
+    <td  title="1" >银行应将结汇所得人民币资金直接划转至交易对方的境内人民币账户。</td>
+    <td >4</td>
+    <td >BCD</td>
+</tr>
+<tr  style='mso-height-source:userset;height:48pt' id='r278'>
+    <td height='62' style='height:46.5pt;overflow:hidden;'>境内居民小王在美国亚马逊网上购物网站上开有一个网店，每个月都有几笔交易发生并从境外收到货款，每月销售额普遍在5-10万美元，收到的货款直接全部进入小王本人开立的个人储蓄账户中并进行结汇。请问以上业务办理过程中，存在哪些错误之处？ </td>
+    <td  title="1" >小王应依法办理工商登记或者其他执业手续。</td>
+    <td  title="1" >小王应在银行开立个人外汇结算账户，并通过个人结算账户办理对外货物贸易经营活动。</td>
+    <td ></td>
+    <td ></td>
+    <td >4</td>
+    <td >AB</td>
+</tr>
+<tr height='96' style='mso-height-source:userset;height:72pt' id='r279'>
+    <td height='94' style='height:70.5pt;overflow:hidden;'>2018年5月08日，某银行临柜人员应A客户需求，从其个人账户上分别给另外4人的账户划转人民币资金60万元，并分别购汇4.9万美元，随后汇往境外同一账户。请问该笔业务是否可以办理？</td>
+    <td >可以办理。</td>
+    <td >不可以办理。个人不得以分拆等方式规避个人结汇和境内个人购汇年度总额管理。</td>
+    <td title="1"  >不可以办理。5个以上不同个人同日、隔日或连续多日分别购汇后，将外汇汇给境外同一个人或机构。该行为属于个人分拆结售汇行为。</td>
+    <td  title="1" >不可以办理。对于个人分拆结售汇特征明显、银行能够确认为分拆结售汇行为的，应不予办理。</td>
+    <td>4</td>
+    <td >BCD</td>
+</tr>
+</table>
+</div>
+</div>
+</body>
+</html>
+
+
+<script>
+    var number=279;var numberarr=new Array();var counter=0;var questionsCounter=4;
+    var numberarr2=new Array();var t=new Array();var tc=0;var ac=0;var lc=0;var gc=0;
+    randomProblemDry();
+    randomOptions();
+    clear();
+    function clear(){
+        ac=0;
+        document.getElementById('answerP').innerHTML="";
+        var x=document.getElementById('legend');
+        x.innerHTML="第"+(counter+1)+'题';
+        tc=0;
+        options();
+        clear2();
+        problemDry();
+        answer();
+    }
+    function clear2(){
+        for(var i=0;i<=3;i++){
+            var check = document.getElementsByName('options')[i];
+            check.checked=false;
+        }
+    }
+    function randomProblemDry(a){
+        a=number;
+        var arr = new Array(a);
+        for(var i=0;i<arr.length;i++){
+            arr[i] = i;
+        }
+        var t;
+        for(var i = 0;i < arr.length; i++){
+            var rand = parseInt(Math.random()*arr.length);
+            t = arr[rand];
+            arr[rand] =arr[i];
+            arr[i] = t;
+        }
+        numberarr=arr;
+    }
+    function randomOptions(){
+        questionsCounter=4;
+        var arr = new Array(questionsCounter);
+        for(var i=0;i<arr.length;i++){
+            arr[i] = i;
+        }
+        var t;
+        for(var i = 0;i < arr.length; i++){
+            var rand = parseInt(Math.random()*arr.length);
+            t = arr[rand];
+            arr[rand] =arr[i];
+            arr[i] = t;
+        }
+        numberarr2=arr;
+    }
+    function problemDry(){
+        var x=document .getElementById ("table1").rows [numberarr[counter]].cells[5];
+        var y=document.getElementById("legendOptions");
+        if(x.innerHTML==1){
+            y.innerHTML="单选题";
+        }
+        else if(x.innerHTML==2){
+            y.innerHTML="多选题";
+        }
+        else if(x.innerHTML==3){
+            y.innerHTML="判断题";
+        }
+        else if(x.innerHTML==4){
+            y.innerHTML="不定项";
+        }
+        var valueTd=document .getElementById ("table1").rows [numberarr[counter]].cells[0];
+        document.getElementById('problemDry').innerHTML=valueTd.innerHTML;
+    }
+    /*选项答案获取*/
+    function options(){
+        for(var i=1;i<=numberarr2.length;i++){
+            var id="options"+i;
+            var valueTd=document .getElementById ("table1").rows [numberarr[counter]].cells[numberarr2[i-1]+1];
+            document.getElementById(id).style.fontSize="20px";
+            document.getElementById(id).style.color="black";
+            if(valueTd.title==1){
+                t[i]=i;
+                tc++;
+                if(lc==1){
+                    document.getElementById(id).style.fontSize="22px";
+                    document.getElementById(id).style.color="rgba(200,0,0)";
+                }
+                if(lc==0){
+                    document.getElementById(id).style.fontSize="20px";
+                    document.getElementById(id).style.color="black";
+                }
+            }
+            else{
+                t[i]=10;
+            }
+            document.getElementById(id).innerHTML=valueTd.innerHTML;
+        }
+
+    }
+    /*正确/错误判断*/
+    function results1() {
+        var xc = 0;var yc=0;
+            for (var i = 0; i <= 4; i++) {
+                var check = document.getElementsByName('options')[i];
+                if(check.checked==false){yc++;}
+                if (check.checked == true) {
+                    if (i + 1 == t[i + 1]) {
+                        xc++;
+                        if (xc == tc) {
+                            document.getElementById('results').innerHTML = "正确";
+                        }
+                        else if (xc < tc) {
+                            document.getElementById('results').innerHTML = "错误";
+                        }
+                    }
+                    else {
+                        xc--;
+                        document.getElementById('results').innerHTML = "错误";
+                    }
+                }
+            }
+        if(yc==5){
+            document.getElementById('results').innerHTML = "错误";
+        }
+    }
+    function buttonDown(){
+        if(counter==number-1){
+            alert("这是最后一题");
+        }
+        else{
+            counter++;
+            clear();
+        }
+    }
+    function buttonUp(){
+        if(counter==0){
+            alert("这是第一题");
+        }
+        else{
+            counter--;
+            clear();
+        }
+    }
+    function answer(){
+        var x=document.getElementById('answerP');
+        for(var i=1;i<=5;i++){
+            if(t[i]==1){x.innerHTML= x.innerHTML+"A"+"</nbsp>";}
+            else if(t[i]==2){x.innerHTML= x.innerHTML+"B"+"</nbsp>";}
+            else if(t[i]==3){x.innerHTML= x.innerHTML+"C"+"</nbsp>";}
+            else if(t[i]==4){x.innerHTML= x.innerHTML+"D"+"</nbsp>";}
+            else if(t[i]==5){x.innerHTML= x.innerHTML+"F"+"</nbsp>";}
+        }
+    }
+    function answerClick(){
+
+        if(lc==0){
+            if(ac==0){
+                /*document.getElementById('results').style.display="inline";*/
+                document.getElementById("answerP").style.display="inline";
+                ac++;
+                lc++;
+                document.getElementById("button3").innerHTML="隐藏答案";
+            }
+        }
+        else if(lc==1){
+            lc--;
+            ac=0;
+            document.getElementById("button3").innerHTML="显示答案";
+            /*document.getElementById('results').style.display="none";*/
+            document.getElementById("answerP").style.display="none";
+        }
+        clear();
+    }
+    function passward(){
+        var x=document.getElementById("passwordInput");
+        if(x.value=="wstym"){
+         document.getElementById("box").style.display="block";
+         document.getElementById("password").style.display="none";
+        }
+        else{
+            alert("请输入正确密码!") ;
+        }
+    }
+</script>
